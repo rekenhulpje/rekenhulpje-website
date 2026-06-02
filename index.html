@@ -73,14 +73,12 @@
 	  color: #17212b;
 	}
 
-	.brand::before {
-	  content: "";
-	  width: 28px;
-	  height: 28px;
-	  border-radius: 8px;
-	  background: linear-gradient(135deg, #1769aa, #2bb3a3);
-	  display: inline-block;
-	}
+    .brand img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      display: block;
+    }
 
 	.nav-link {
 	  color: #405364;
@@ -215,7 +213,10 @@
   <header>
     <div class="wrap">
       <nav>
-        <a class="brand" href="/">Rekenhulpje.nl</a>
+        <a class="brand" href="/">
+          <img src="/assets/logo.png" alt="" width="32" height="32">
+          <span>Rekenhulpje.nl</span>
+        </a>
 		<a class="nav-link" href="/hypotheekcalculator.html">Hypotheekcalculator</a>
 		<a class="nav-link" href="/woonlastencalculator.html">Woonlasten</a>
       </nav>
