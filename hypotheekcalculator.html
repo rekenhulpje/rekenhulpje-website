@@ -3,8 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hypotheekcalculator - Rekenhulpje.nl</title>
-  <meta name="description" content="Bereken je bruto maandlast, rente, aflossing en indicatieve hypotheekrenteaftrek met de hypotheekcalculator van Rekenhulpje.nl. Exporteer je aflossingsschema naar Excel of CSV.">
+  <title>Hypotheekcalculator - Bereken maandlasten en aflossingsschema</title>
+  <meta name="description" content="Bereken je hypotheeklasten, rente, aflossing en indicatieve hypotheekrenteaftrek. Exporteer je aflossingsschema eenvoudig naar Excel of CSV.">
+  <link rel="canonical" href="https://rekenhulpje.nl/hypotheekcalculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rekenhulpje.nl">
+  <meta property="og:title" content="Hypotheekcalculator - Rekenhulpje.nl">
+  <meta property="og:description" content="Bereken bruto en netto hypotheeklasten, rente, aflossing en exporteer je aflossingsschema naar Excel of CSV.">
+  <meta property="og:url" content="https://rekenhulpje.nl/hypotheekcalculator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hypotheekcalculator - Rekenhulpje.nl">
+  <meta name="twitter:description" content="Bereken hypotheeklasten en exporteer je aflossingsschema naar Excel of CSV.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Hypotheekcalculator",
+    "url": "https://rekenhulpje.nl/hypotheekcalculator.html",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "nl-NL",
+    "description": "Calculator voor hypotheeklasten, rente, aflossing, indicatieve hypotheekrenteaftrek en aflossingsschema export.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Rekenhulpje.nl",
+      "url": "https://rekenhulpje.nl/"
+    }
+  }
+  </script>
   <style>
     body {
       margin: 0;
@@ -111,6 +142,46 @@
       color: #536273;
     }
 
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 22px 0 34px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #e3e8ef;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .info-card p {
+      margin: 0;
+    }
+
+    .faq {
+      max-width: 820px;
+    }
+
+    .faq h3 {
+      margin: 24px 0 6px;
+      font-size: 20px;
+    }
+
+    .related-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: #1769aa;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
     footer {
       padding: 28px 0;
       color: #657586;
@@ -193,11 +264,59 @@
 
     <section class="content-section">
       <div class="wrap">
-        <h2>Over deze calculator</h2>
+        <h2>Hypotheeklasten berekenen</h2>
         <p>
-          Deze calculator geeft een indicatie van bruto maandlasten, rente, aflossing,
-          eigenwoningforfait en hypotheekrenteaftrek. De uitkomst is geen financieel advies.
+          Met deze hypotheekcalculator bereken je een indicatie van je bruto maandlasten,
+          rente, aflossing, eigenwoningforfait en hypotheekrenteaftrek. Je kunt kiezen tussen
+          een annuiteitenhypotheek en een lineaire hypotheek, zodat je ziet hoe de maandlasten
+          en restschuld zich ontwikkelen.
         </p>
+        <div class="info-grid">
+          <article class="info-card">
+            <h3>Aflossingsschema naar Excel of CSV</h3>
+            <p>
+              Gebruik de export om je aflossingsschema te bewaren, naast andere scenario's te leggen
+              of verder te rekenen in Excel. Handig als je zoekt naar hypotheeklasten in Excel of een
+              hypotheek aflossingsschema als CSV.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Rente en aflossing per maand</h3>
+            <p>
+              De berekening splitst de maandlast op in rente en aflossing. Daardoor zie je welk deel
+              naar de bankrente gaat en welk deel je hypotheekschuld verlaagt.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Hypotheekrenteaftrek indicatief</h3>
+            <p>
+              De fiscale uitkomst is vereenvoudigd en bedoeld als indicatie. Persoonlijke aftrekposten,
+              inkomen en actuele regelgeving kunnen invloed hebben op je echte netto maandlast.
+            </p>
+          </article>
+        </div>
+
+        <div class="faq">
+          <h2>Veelgestelde vragen</h2>
+          <h3>Kan ik mijn hypotheekberekening exporteren naar Excel?</h3>
+          <p>
+            Ja. De calculator bevat een export voor het aflossingsschema, zodat je de maandelijkse
+            rente, aflossing en restschuld in Excel kunt bekijken.
+          </p>
+          <h3>Is de hypotheekrenteaftrek exact?</h3>
+          <p>
+            Nee. De hypotheekrenteaftrek is een indicatieve berekening. Gebruik de uitkomst als
+            hulpmiddel, niet als financieel of fiscaal advies.
+          </p>
+          <h3>Wat is het verschil tussen annuitair en lineair?</h3>
+          <p>
+            Bij annuitair blijft de bruto maandlast meestal gelijk, terwijl de verhouding tussen rente
+            en aflossing verandert. Bij lineair los je elke maand hetzelfde bedrag af en daalt de
+            maandlast meestal gedurende de looptijd.
+          </p>
+        </div>
+
+        <a class="related-link" href="/woonlastencalculator.html">Bekijk ook de woonlastencalculator</a>
       </div>
     </section>
   </main>
