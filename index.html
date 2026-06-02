@@ -3,18 +3,209 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rekenhulpje.nl - Nederlandse rekentools</title>
-  <meta name="description" content="Praktische Nederlandse rekentools voor hypotheek, woonlasten en persoonlijke planning.">
-</head>
-<body style="font-family: Arial, sans-serif; margin: 0; color: #182027;">
-  <main style="max-width: 900px; margin: 0 auto; padding: 40px 24px;">
-    <h1>Rekenhulpje.nl</h1>
-    <p>Praktische rekentools voor Nederlandse huishoudens.</p>
+  <title>Rekenhulpje.nl - Praktische rekentools voor Nederlandse huishoudens</title>
+  <meta name="description" content="Gebruik praktische Nederlandse rekentools voor hypotheek, woonlasten en persoonlijke planning.">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #17212b;
+      background: #f6f8fa;
+      line-height: 1.6;
+    }
 
-    <h2>Beschikbare tools</h2>
-    <p>
-      <a href="/hypotheekcalculator.html">Hypotheekcalculator Nederland</a>
-    </p>
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e3e8ef;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+	nav {
+	  height: 68px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: space-between;
+	}
+
+	.brand {
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 10px;
+	  font-size: 20px;
+	  font-weight: 800;
+	  text-decoration: none;
+	  color: #17212b;
+	}
+
+	.brand::before {
+	  content: "";
+	  width: 28px;
+	  height: 28px;
+	  border-radius: 8px;
+	  background: linear-gradient(135deg, #1769aa, #2bb3a3);
+	  display: inline-block;
+	}
+
+	.nav-link {
+	  color: #405364;
+	  text-decoration: none;
+	  font-weight: 700;
+	}
+
+	.nav-link:hover {
+	  color: #1769aa;
+	}
+
+    .hero {
+      padding: 72px 0 56px;
+      background: #ffffff;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin: 0 0 18px;
+      font-size: 44px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0 0 28px;
+      font-size: 19px;
+      color: #4f5f6f;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 18px;
+      border-radius: 8px;
+      background: #1769aa;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 44px 0;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .tool {
+      background: #ffffff;
+      border: 1px solid #e3e8ef;
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .tool h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
+
+    .tool p {
+      margin: 0 0 18px;
+      color: #536273;
+    }
+
+    .tool a {
+      color: #1769aa;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: #657586;
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 48px 0 38px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="/">Rekenhulpje.nl</a>
+		<a class="nav-link" href="/hypotheekcalculator.html">Hypotheekcalculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Praktische rekentools voor Nederlandse huishoudens.</h1>
+        <p>
+          Begin met onze hypotheekcalculator en bereken je maandlasten, rente,
+          aflossing en een indicatie van hypotheekrenteaftrek.
+        </p>
+        <a class="button" href="/hypotheekcalculator.html">Bereken je hypotheek</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Beschikbare tools</h2>
+
+        <div class="tools">
+          <article class="tool">
+            <h3>Hypotheekcalculator Nederland</h3>
+            <p>
+              Bereken bruto maandlasten, rente, aflossing, restschuld en een
+              indicatie van hypotheekrenteaftrek.
+            </p>
+            <a href="/hypotheekcalculator.html">Open calculator</a>
+          </article>
+
+          <article class="tool">
+            <h3>Woonlastencalculator</h3>
+            <p>
+              Binnenkort: krijg meer inzicht in hypotheek, energie, verzekeringen,
+              belastingen en vaste lasten.
+            </p>
+          </article>
+
+          <article class="tool">
+            <h3>Extra aflossen</h3>
+            <p>
+              Binnenkort: zie wat extra aflossen doet met je maandlasten en totale
+              rentekosten.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">
+      Rekenhulpje.nl geeft indicatieve berekeningen en geen financieel advies.
+    </div>
+  </footer>
 </body>
 </html>
