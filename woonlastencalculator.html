@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Woonlastencalculator Nederland - Rekenhulpje.nl</title>
+  <meta name="description" content="Bereken je totale netto woonlasten per maand met hypotheek, energie, verzekeringen, belastingen, onderhoud en VvE. Exporteer je overzicht naar Excel of CSV.">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #17212b;
+      background: #f6f8fa;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e3e8ef;
+    }
+
+    .wrap {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    nav {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      text-decoration: none;
+      color: #17212b;
+    }
+
+    .brand::before {
+      content: "";
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1769aa, #2bb3a3);
+      display: inline-block;
+    }
+
+    .nav-link,
+    .back-link {
+      color: #405364;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .nav-link:hover,
+    .back-link:hover {
+      color: #1769aa;
+    }
+
+    .page-intro {
+      background: #ffffff;
+      padding: 34px 0 26px;
+      border-bottom: 1px solid #e3e8ef;
+    }
+
+    .page-intro h1 {
+      max-width: 780px;
+      margin: 12px 0 12px;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .page-intro p {
+      max-width: 760px;
+      margin: 0;
+      font-size: 18px;
+      color: #4f5f6f;
+    }
+
+    .calculator-section {
+      padding: 24px 0 36px;
+    }
+
+    .calculator-frame {
+      width: 100%;
+      height: 1100px;
+      border: 0;
+      max-width: 100%;
+      background: #ffffff;
+      border-radius: 8px;
+    }
+
+    .content-section {
+      padding: 12px 0 48px;
+    }
+
+    .content-section h2 {
+      margin-top: 0;
+    }
+
+    .content-section p {
+      max-width: 760px;
+      color: #536273;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: #657586;
+      font-size: 14px;
+      border-top: 1px solid #e3e8ef;
+      background: #ffffff;
+    }
+
+    @media (max-width: 700px) {
+      .wrap {
+        padding: 0 16px;
+      }
+
+      nav {
+        height: auto;
+        min-height: 62px;
+        flex-wrap: wrap;
+        padding: 10px 0;
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+      }
+
+      .page-intro {
+        padding: 26px 0 20px;
+      }
+
+      .page-intro h1 {
+        font-size: 31px;
+      }
+
+      .page-intro p {
+        font-size: 16px;
+      }
+
+      .calculator-section {
+        padding-top: 16px;
+      }
+
+      .calculator-frame {
+        height: 1700px;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="/">Rekenhulpje.nl</a>
+        <a class="nav-link" href="/hypotheekcalculator.html">Hypotheekcalculator</a>
+        <a class="nav-link" href="/woonlastencalculator.html">Woonlasten</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <div class="wrap">
+        <a class="back-link" href="/">Terug naar overzicht</a>
+        <h1>Woonlastencalculator Nederland</h1>
+        <p>
+          Bereken je totale netto woonlasten per maand, inclusief hypotheek, energie,
+          verzekeringen, belastingen, onderhoud en VvE. Exporteer je overzicht naar Excel of CSV.
+        </p>
+      </div>
+    </section>
+
+    <section class="calculator-section">
+      <div class="wrap">
+        <iframe
+          class="calculator-frame"
+          src="https://rekenhulpje-woonlasten.streamlit.app/?embed=true"
+          title="Woonlastencalculator van Rekenhulpje.nl">
+        </iframe>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="wrap">
+        <h2>Over deze calculator</h2>
+        <p>
+          Deze calculator geeft een indicatie van je maandelijkse woonlasten. De uitkomst is
+          geen financieel advies en hangt af van je persoonlijke situatie en actuele tarieven.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Rekenhulpje.nl geeft indicatieve berekeningen en geen financieel advies.
+    </div>
+  </footer>
+</body>
+</html>
