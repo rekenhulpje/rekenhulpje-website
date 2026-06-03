@@ -214,6 +214,13 @@
       text-decoration: underline;
     }
 
+    .footer-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 700px) {
       .wrap {
         padding: 0 16px;
@@ -355,7 +362,10 @@
   <footer>
     <div class="wrap footer-content">
       <span>Rekenhulpje.nl geeft indicatieve berekeningen en geen financieel advies.</span>
-      <a class="support-link" href="https://ko-fi.com/rekenhulpje" target="_blank" rel="noopener">Steun Rekenhulpje</a>
+      <span class="footer-links">
+        <a class="support-link" href="https://www.instagram.com/rekenhulpje.nl/" target="_blank" rel="noopener">Instagram</a>
+        <a class="support-link" href="https://ko-fi.com/rekenhulpje" target="_blank" rel="noopener">Steun Rekenhulpje</a>
+      </span>
     </div>
   </footer>
 </body>
