@@ -196,6 +196,24 @@
       background: #ffffff;
     }
 
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .support-link {
+      color: #1769aa;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .support-link:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 700px) {
       .wrap {
         padding: 0 16px;
@@ -336,8 +354,9 @@
   </main>
 
   <footer>
-    <div class="wrap">
-      Rekenhulpje.nl geeft indicatieve berekeningen en geen financieel advies.
+    <div class="wrap footer-content">
+      <span>Rekenhulpje.nl geeft indicatieve berekeningen en geen financieel advies.</span>
+      <a class="support-link" href="https://ko-fi.com/rekenhulpje" target="_blank" rel="noopener">Steun Rekenhulpje</a>
     </div>
   </footer>
 </body>
