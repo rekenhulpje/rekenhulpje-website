@@ -259,6 +259,23 @@
       flex-wrap: wrap;
     }
 
+    .footer-tools {
+      margin-bottom: 18px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-tools a {
+      color: #1769aa;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-tools a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 640px) {
       .wrap {
         padding: 0 16px;
@@ -414,6 +431,13 @@
   </main>
 
   <footer>
+    <div class="wrap footer-tools" aria-label="Alle rekentools">
+      <a href="/">Overzicht</a>
+      <a href="/hypotheekcalculator.html">Hypotheekcalculator</a>
+      <a href="/woonlastencalculator.html">Woonlastencalculator</a>
+      <a href="/verkoopopbrengst-calculator.html">Verkoopopbrengstcalculator</a>
+      <a href="/brandstofkosten-calculator.html">Brandstofkosten Calculator</a>
+    </div>
     <div class="wrap footer-content">
       <span>Rekenhulpje.nl geeft indicatieve berekeningen en geen financieel advies.</span>
       <span class="footer-links">
