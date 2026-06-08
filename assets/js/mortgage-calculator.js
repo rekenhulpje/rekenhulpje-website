@@ -77,6 +77,7 @@ function calculate() {
 
   byId("mortgage-primary-result").textContent = euroMonth(netMonthly);
   renderMetrics(byId("mortgage-metrics"), [
+    { label: "Netto maandlast indicatief", value: euroMonth(netMonthly) },
     { label: "Bruto maandlast", value: euroMonth(first.payment) },
     { label: "Rente eerste maand", value: euroMonth(first.interest) },
     { label: "Aflossing eerste maand", value: euroMonth(first.principal) },
