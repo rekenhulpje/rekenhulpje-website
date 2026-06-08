@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rekenhulpje | Hypotheek en woonlasten berekenen</title>
-  <meta name="description" content="Gebruik gratis Nederlandse rekentools voor hypotheeklasten, woonlasten, hypotheekrenteaftrek en maandlasten. Met Excel- en CSV-export waar handig.">
+  <title>Rekenhulpje | Hypotheek, woonlasten en brandstofkosten berekenen</title>
+  <meta name="description" content="Gebruik gratis Nederlandse rekentools voor hypotheeklasten, woonlasten, verkoopopbrengst, brandstofkosten en maandlasten. Met Excel- en CSV-export waar handig.">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XSE89ZZVS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,18 +16,18 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rekenhulpje">
   <meta property="og:title" content="Rekenhulpje - Nederlandse rekentools">
-  <meta property="og:description" content="Praktische calculators voor hypotheeklasten, woonlasten en maandelijkse kosten in Nederland.">
+  <meta property="og:description" content="Praktische calculators voor hypotheeklasten, woonlasten, verkoopopbrengst en brandstofkosten in Nederland.">
   <meta property="og:url" content="https://rekenhulpje.nl/">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Rekenhulpje - Nederlandse rekentools">
-  <meta name="twitter:description" content="Bereken hypotheeklasten en woonlasten met praktische Nederlandse rekentools.">
+  <meta name="twitter:description" content="Bereken hypotheeklasten, woonlasten, verkoopopbrengst en brandstofkosten met praktische Nederlandse rekentools.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Rekenhulpje",
     "url": "https://rekenhulpje.nl/",
-    "description": "Gratis Nederlandse rekentools voor hypotheeklasten, woonlasten en maandelijkse kosten.",
+    "description": "Gratis Nederlandse rekentools voor hypotheeklasten, woonlasten, verkoopopbrengst, brandstofkosten en maandelijkse kosten.",
     "inLanguage": "nl-NL",
     "publisher": {
       "@type": "Organization",
@@ -59,6 +59,12 @@
         "position": 3,
         "name": "Verkoopopbrengstcalculator",
         "url": "https://rekenhulpje.nl/verkoopopbrengst-calculator.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Brandstofkosten Calculator",
+        "url": "https://rekenhulpje.nl/brandstofkosten-calculator.html"
       }
     ]
   }
@@ -88,6 +94,7 @@
 	  display: flex;
 	  align-items: center;
 	  justify-content: space-between;
+      gap: 18px;
 	}
 
 	.brand {
@@ -248,6 +255,22 @@
     }
 
     @media (max-width: 640px) {
+      .wrap {
+        padding: 0 16px;
+      }
+
+      nav {
+        height: auto;
+        min-height: 62px;
+        flex-wrap: wrap;
+        padding: 10px 0;
+        justify-content: flex-start;
+      }
+
+      .nav-link {
+        font-size: 14px;
+      }
+
       .hero {
         padding: 48px 0 38px;
       }
@@ -273,6 +296,7 @@
 		<a class="nav-link" href="/hypotheekcalculator.html">Hypotheekcalculator</a>
 		<a class="nav-link" href="/woonlastencalculator.html">Woonlasten</a>
 		<a class="nav-link" href="/verkoopopbrengst-calculator.html">Verkoopopbrengst</a>
+		<a class="nav-link" href="/brandstofkosten-calculator.html">Brandstof</a>
       </nav>
     </div>
   </header>
@@ -282,8 +306,8 @@
       <div class="wrap">
         <h1>Praktische rekentools voor Nederlandse huishoudens.</h1>
         <p>
-          Begin met onze hypotheek- en woonlastencalculators en krijg meer inzicht
-          in je maandlasten, vaste lasten en indicatieve hypotheekrenteaftrek.
+          Begin met onze calculators en krijg meer inzicht in je hypotheek,
+          woonlasten, verkoopopbrengst, brandstofkosten en andere maandlasten.
         </p>
         <a class="button" href="/hypotheekcalculator.html">Bereken je hypotheek</a>
       </div>
@@ -320,6 +344,15 @@
             </p>
             <a href="/verkoopopbrengst-calculator.html">Open calculator</a>
           </article>
+
+          <article class="tool">
+            <h3>Brandstofkosten Calculator</h3>
+            <p>
+              Bereken wat benzine, diesel of LPG per maand kost en bekijk wat hogere
+              literprijzen, accijns en btw doen met je maandlasten.
+            </p>
+            <a href="/brandstofkosten-calculator.html">Open calculator</a>
+          </article>
         </div>
       </div>
     </section>
@@ -329,14 +362,15 @@
         <h2>Rekentools voor maandlasten in Nederland</h2>
         <p>
           Rekenhulpje helpt je om snel grip te krijgen op bedragen die vaak lastig te overzien zijn:
-          hypotheeklasten, rente, aflossing, hypotheekrenteaftrek en vaste woonlasten. De tools zijn bedoeld
+          hypotheeklasten, rente, aflossing, hypotheekrenteaftrek, vaste woonlasten en brandstofkosten. De tools zijn bedoeld
           als praktische indicatie voor Nederlandse huishoudens en maken het makkelijk om je berekening later
           te bewaren of te vergelijken.
         </p>
         <p>
           Begin met de hypotheekcalculator als je vooral rente, aflossing en een aflossingsschema wilt zien.
           Gebruik de woonlastencalculator als je naast je hypotheek ook energie, verzekeringen, belastingen,
-          onderhoud en VvE wilt meenemen.
+          onderhoud en VvE wilt meenemen. Gebruik de brandstofkosten calculator als je wilt zien wat benzine,
+          diesel of LPG per maand kost en wat prijsstijgingen met je budget doen.
         </p>
         <p>
           De calculators zijn gemaakt voor mensen die eerst zelf willen begrijpen wat een keuze ongeveer
@@ -362,6 +396,8 @@
           <a href="/woonlastencalculator.html">Vaste lasten koopwoning inschatten</a>
           <a href="/verkoopopbrengst-calculator.html">Wat houd ik over na verkoop van mijn huis?</a>
           <a href="/verkoopopbrengst-calculator.html">Netto opbrengst huis berekenen</a>
+          <a href="/brandstofkosten-calculator.html">Brandstofkosten per maand berekenen</a>
+          <a href="/brandstofkosten-calculator.html">Accijns en btw op benzine berekenen</a>
         </div>
       </div>
     </section>
