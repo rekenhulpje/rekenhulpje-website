@@ -89,19 +89,34 @@
 }
 
 .radio-group {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  flex-wrap: wrap;
 }
 
 .radio-group label {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 7px;
   border: 1px solid #cfd8e3;
   border-radius: 8px;
   padding: 9px 11px;
   cursor: pointer;
+  box-sizing: border-box;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.radio-group input {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.radio-group label {
+  overflow-wrap: anywhere;
 }
 
 .native-note {
@@ -279,6 +294,12 @@
 
   .metric-grid.native {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .radio-group {
+    grid-template-columns: 1fr;
   }
 }
 
