@@ -13,6 +13,7 @@
     gtag('config', 'G-1XSE89ZZVS');
   </script>
   <link rel="canonical" href="https://rekenhulpje.nl/woonlastencalculator.html">
+  <link rel="stylesheet" href="/assets/calculators.css">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rekenhulpje">
   <meta property="og:title" content="Woonlastencalculator - Rekenhulpje">
@@ -168,15 +169,6 @@
       text-decoration: none;
     }
 
-    .calculator-frame {
-      width: 100%;
-      height: 1100px;
-      border: 0;
-      max-width: 100%;
-      background: #ffffff;
-      border-radius: 8px;
-    }
-
     .content-section {
       padding: 12px 0 48px;
     }
@@ -299,10 +291,6 @@
         padding-top: 16px;
       }
 
-      .calculator-frame {
-        height: 1700px;
-        border-radius: 0;
-      }
     }
   </style>
 </head>
@@ -342,11 +330,119 @@
 
     <section class="calculator-section">
       <div class="wrap">
-        <iframe
-          class="calculator-frame"
-          src="https://rekenhulpje-woonlasten.streamlit.app/?embed=true"
-          title="Woonlastencalculator van Rekenhulpje">
-        </iframe>
+        <div class="native-calculator" id="woonlasten-native-calculator">
+          <section class="result-banner">
+            <span>Totale netto woonlasten per maand</span>
+            <strong id="housing-primary-result">€ 0/mnd</strong>
+          </section>
+          <div class="calculator-grid">
+            <div class="calculator-stack">
+              <section class="calculator-card">
+                <h2>1. Woning</h2>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="housing-purchase-price">Woningwaarde / koopsom</label>
+                    <input id="housing-purchase-price" type="number" min="0" step="5000" value="450000">
+                  </div>
+                  <div class="field">
+                    <label for="housing-woz-value">WOZ-waarde</label>
+                    <input id="housing-woz-value" type="number" min="0" step="5000" value="450000">
+                  </div>
+                  <div class="field">
+                    <label for="housing-own-funds">Eigen geld</label>
+                    <input id="housing-own-funds" type="number" min="0" step="5000" value="25000">
+                  </div>
+                  <div class="field">
+                    <label for="housing-mortgage-amount">Hypotheekbedrag</label>
+                    <input id="housing-mortgage-amount" type="number" min="0" step="5000" value="425000">
+                  </div>
+                </div>
+                <p class="native-note">Suggestie hypotheekbedrag: <strong id="housing-suggested-mortgage">€ 425.000</strong></p>
+              </section>
+
+              <section class="calculator-card">
+                <h2>2. Hypotheek</h2>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="housing-interest-rate">Rentepercentage</label>
+                    <div class="range-row">
+                      <input id="housing-interest-range" type="range" min="0" max="10" step="0.01" value="4.10">
+                      <input id="housing-interest-rate" type="number" min="0" max="10" step="0.01" value="4.10">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="housing-term-years">Looptijd</label>
+                    <input id="housing-term-years" type="number" min="5" max="30" step="1" value="30">
+                  </div>
+                </div>
+                <div class="field">
+                  <span class="radio-label">Hypotheekvorm</span>
+                  <div class="radio-group">
+                    <label><input type="radio" name="housing-mortgage-type" value="Annuiteit" checked> Annuiteit</label>
+                    <label><input type="radio" name="housing-mortgage-type" value="Lineair"> Lineair</label>
+                  </div>
+                </div>
+              </section>
+
+              <section class="calculator-card">
+                <h2>3. Vaste lasten</h2>
+                <div class="field-grid">
+                  <div class="field"><label for="housing-energy">Energie per maand</label><input id="housing-energy" type="number" min="0" step="10" value="180"></div>
+                  <div class="field"><label for="housing-water">Water per maand</label><input id="housing-water" type="number" min="0" step="5" value="20"></div>
+                  <div class="field"><label for="housing-internet">Internet en diensten per maand</label><input id="housing-internet" type="number" min="0" step="5" value="55"></div>
+                  <div class="field"><label for="housing-insurance">Verzekeringen per maand</label><input id="housing-insurance" type="number" min="0" step="5" value="35"></div>
+                  <div class="field"><label for="housing-maintenance">Onderhoud per maand</label><input id="housing-maintenance" type="number" min="0" step="10" value="150"></div>
+                  <div class="field"><label for="housing-vve">VvE per maand</label><input id="housing-vve" type="number" min="0" step="10" value="0"></div>
+                  <div class="field"><label for="housing-local-taxes">Lokale belastingen per jaar</label><input id="housing-local-taxes" type="number" min="0" step="50" value="900"></div>
+                  <div class="field"><label for="housing-water-board">Waterschap per jaar</label><input id="housing-water-board" type="number" min="0" step="25" value="450"></div>
+                  <div class="field"><label for="housing-leasehold">Erfpacht per maand</label><input id="housing-leasehold" type="number" min="0" step="10" value="0"></div>
+                  <div class="field"><label for="housing-contingency">Onvoorzien / reservering</label><input id="housing-contingency" type="number" min="0" step="10" value="0"></div>
+                  <div class="field"><label for="housing-parking-storage">Parkeren / berging / opslag</label><input id="housing-parking-storage" type="number" min="0" step="10" value="0"></div>
+                  <div class="field"><label for="housing-other">Overige woonlasten</label><input id="housing-other" type="number" min="0" step="10" value="0"></div>
+                </div>
+                <p class="native-note">Boodschappen en leefgeld vallen buiten deze woonlastencalculator.</p>
+              </section>
+
+              <section class="calculator-card">
+                <h3>Belasting en aannames</h3>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="housing-deduction-rate">Aftrekpercentage</label>
+                    <div class="range-row">
+                      <input id="housing-deduction-range" type="range" min="0" max="49.5" step="0.01" value="37.56">
+                      <input id="housing-deduction-rate" type="number" min="0" max="49.5" step="0.01" value="37.56">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="housing-tax-year">Belastingjaar in berekening</label>
+                    <input id="housing-tax-year" type="number" min="1" max="30" step="1" value="1">
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div class="calculator-stack">
+              <section class="metric-grid native" id="housing-metrics"></section>
+              <section class="calculator-card chart-box">
+                <h2>Verdeling van je woonlasten</h2>
+                <canvas id="housing-donut-chart" height="330"></canvas>
+              </section>
+              <section class="calculator-card">
+                <h2>Download</h2>
+                <p class="native-note">Jaarlijkse posten zoals lokale belastingen en waterschap worden automatisch omgerekend naar maandbedragen.</p>
+                <div class="download-row">
+                  <button class="download-button" type="button" id="housing-excel-download">Download Excel</button>
+                  <button class="download-button secondary" type="button" id="housing-csv-download">Download CSV</button>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <section class="calculator-card" style="margin-top: 22px;">
+            <h2>Maandlasten per post</h2>
+            <div class="table-wrap" id="housing-costs-table"></div>
+          </section>
+        </div>
       </div>
     </section>
 
@@ -417,5 +513,7 @@
       </span>
     </div>
   </footer>
+  <script src="/assets/vendor/chart.umd.min.js"></script>
+  <script type="module" src="/assets/js/housing-costs-calculator.js?v=native-20260608b"></script>
 </body>
 </html>

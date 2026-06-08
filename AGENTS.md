@@ -48,4 +48,4 @@ Checks voor website-wijzigingen:
 
 ## Migratiestatus
 
-De huidige calculators kunnen nog via Streamlit-iframes bestaan, maar de gewenste richting is website-native. Bij nieuwe publieke calculators of grote verbeteringen aan bestaande calculators moet de implementatie richting directe HTML/CSS/JavaScript op de website bewegen.
+De publieke calculators op de website zijn website-native. De oude Streamlit-repos mogen nog als referentie of prototype blijven bestaan, maar nieuwe publieke calculators en grote calculatorwijzigingen moeten direct in HTML/CSS/JavaScript binnen deze repo worden gebouwd.

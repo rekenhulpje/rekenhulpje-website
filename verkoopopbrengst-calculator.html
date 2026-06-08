@@ -13,6 +13,7 @@
     gtag('config', 'G-1XSE89ZZVS');
   </script>
   <link rel="canonical" href="https://rekenhulpje.nl/verkoopopbrengst-calculator.html">
+  <link rel="stylesheet" href="/assets/calculators.css">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rekenhulpje">
   <meta property="og:title" content="Wat houd ik over na verkoop van mijn huis?">
@@ -168,15 +169,6 @@
       text-decoration: none;
     }
 
-    .calculator-frame {
-      width: 100%;
-      height: 1150px;
-      border: 0;
-      max-width: 100%;
-      background: #ffffff;
-      border-radius: 8px;
-    }
-
     .content-section {
       padding: 12px 0 48px;
     }
@@ -299,10 +291,6 @@
         padding-top: 16px;
       }
 
-      .calculator-frame {
-        height: 1700px;
-        border-radius: 0;
-      }
     }
   </style>
 </head>
@@ -342,11 +330,97 @@
 
     <section class="calculator-section">
       <div class="wrap">
-        <iframe
-          class="calculator-frame"
-          src="https://rekenhulpje-verkoopopbrengst.streamlit.app/?embed=true"
-          title="Verkoopopbrengstcalculator van Rekenhulpje">
-        </iframe>
+        <div class="native-calculator" id="verkoopopbrengst-native-calculator">
+          <section class="result-banner">
+            <span>Netto over na verkoop</span>
+            <strong id="sale-primary-result">€ 0</strong>
+          </section>
+          <div class="calculator-grid">
+            <div class="calculator-stack">
+              <section class="calculator-card">
+                <h2>1. Woning verkopen</h2>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="sale-price">Verwachte verkoopprijs</label>
+                    <input id="sale-price" type="number" min="0" step="5000" value="450000">
+                  </div>
+                  <div class="field">
+                    <label for="sale-remaining-mortgage">Resterende hypotheek / eigenwoningschuld</label>
+                    <input id="sale-remaining-mortgage" type="number" min="0" step="5000" value="300000">
+                  </div>
+                  <div class="field">
+                    <label for="sale-existing-home-reserve">Bestaande eigenwoningreserve</label>
+                    <input id="sale-existing-home-reserve" type="number" step="5000" value="0">
+                  </div>
+                </div>
+              </section>
+
+              <section class="calculator-card">
+                <h2>2. Verkoopkosten</h2>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="sale-broker-percentage">Makelaarscourtage</label>
+                    <div class="range-row">
+                      <input id="sale-broker-range" type="range" min="0" max="5" step="0.1" value="1.5">
+                      <input id="sale-broker-percentage" type="number" min="0" max="5" step="0.1" value="1.5">
+                    </div>
+                  </div>
+                  <div class="field"><label for="sale-broker-fixed-fee">Vaste makelaarskosten</label><input id="sale-broker-fixed-fee" type="number" min="0" step="100" value="0"></div>
+                  <div class="field"><label for="sale-energy-label-cost">Energielabel</label><input id="sale-energy-label-cost" type="number" min="0" step="50" value="300"></div>
+                  <div class="field"><label for="sale-styling-cost">Verkoopstyling / fotografie</label><input id="sale-styling-cost" type="number" min="0" step="50" value="750"></div>
+                  <div class="field"><label for="sale-valuation-cost">Taxatie / keuring</label><input id="sale-valuation-cost" type="number" min="0" step="50" value="0"></div>
+                  <div class="field"><label for="sale-advertising-cost">Advertentiekosten</label><input id="sale-advertising-cost" type="number" min="0" step="50" value="0"></div>
+                  <div class="field"><label for="sale-other-costs">Overige verkoopkosten</label><input id="sale-other-costs" type="number" min="0" step="50" value="0"></div>
+                </div>
+              </section>
+
+              <section class="calculator-card">
+                <h2>3. Extra afrekening</h2>
+                <div class="field-grid">
+                  <div class="field"><label for="sale-penalty-interest">Boeterente / afloskosten</label><input id="sale-penalty-interest" type="number" min="0" step="100" value="0"></div>
+                  <div class="field"><label for="sale-notary-cost">Notaris / royement</label><input id="sale-notary-cost" type="number" min="0" step="50" value="0"></div>
+                  <div class="field"><label for="sale-moving-buffer">Verhuisbuffer</label><input id="sale-moving-buffer" type="number" min="0" step="250" value="2500"></div>
+                </div>
+                <p class="native-note">Verhuisbuffer telt mee voor je cashplanning, maar niet voor fiscale overwaarde.</p>
+              </section>
+
+              <section class="calculator-card">
+                <h3>Volgende woning</h3>
+                <div class="field-grid">
+                  <div class="field"><label for="sale-next-home-price">Aankoopprijs volgende woning</label><input id="sale-next-home-price" type="number" min="0" step="5000" value="0"></div>
+                  <div class="field"><label for="sale-next-home-costs">Aankoopkosten volgende woning</label><input id="sale-next-home-costs" type="number" min="0" step="1000" value="0"></div>
+                  <div class="field"><label for="sale-desired-new-mortgage">Gewenste nieuwe hypotheek</label><input id="sale-desired-new-mortgage" type="number" min="0" step="5000" value="0"></div>
+                </div>
+              </section>
+            </div>
+
+            <div class="calculator-stack">
+              <section class="metric-grid native" id="sale-metrics"></section>
+              <div class="alert good" id="sale-status"></div>
+              <section class="calculator-card chart-box">
+                <h2>Van verkoopprijs naar netto over</h2>
+                <canvas id="sale-waterfall-chart" height="330"></canvas>
+              </section>
+              <section class="calculator-card">
+                <h2>Bijleenregeling indicatief</h2>
+                <div class="details-list" id="sale-tax-details"></div>
+                <p class="native-note">Indicatief, geen financieel of fiscaal advies.</p>
+              </section>
+              <section class="calculator-card">
+                <h2>Download</h2>
+                <div class="download-row">
+                  <button class="download-button" type="button" id="sale-excel-download">Download Excel</button>
+                  <button class="download-button secondary" type="button" id="sale-csv-download">Download CSV</button>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <section class="calculator-card" style="margin-top: 22px;">
+            <h2>Scenario's verkoopprijs</h2>
+            <div class="table-wrap" id="sale-scenarios-table"></div>
+          </section>
+        </div>
       </div>
     </section>
 
@@ -418,5 +492,7 @@
       </span>
     </div>
   </footer>
+  <script src="/assets/vendor/chart.umd.min.js"></script>
+  <script type="module" src="/assets/js/sale-proceeds-calculator.js?v=native-20260608b"></script>
 </body>
 </html>
