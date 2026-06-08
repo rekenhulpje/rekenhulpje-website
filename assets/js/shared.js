@@ -1,6 +1,7 @@
 const XLSX_SRC = "/assets/vendor/xlsx.mjs.js";
 
 let xlsxPromise = null;
+const usedCalculators = new Set();
 
 export function byId(id) {
   return document.getElementById(id);
@@ -52,8 +53,14 @@ export function syncRangeNumber(rangeId, numberId, callback) {
 
 export function bindCalculator(root, callback) {
   root.querySelectorAll("input, select").forEach((element) => {
-    element.addEventListener("input", callback);
-    element.addEventListener("change", callback);
+    element.addEventListener("input", () => {
+      trackCalculatorUsed(root);
+      callback();
+    });
+    element.addEventListener("change", () => {
+      trackCalculatorUsed(root);
+      callback();
+    });
   });
 }
 
@@ -107,11 +114,13 @@ export function renderTable(container, columns, rows) {
 }
 
 export function downloadCsv(filename, rows) {
+  trackEvent("download_csv", downloadEventParams(filename));
   const csv = toCsv(rows);
   downloadBlob(filename, new Blob([csv], { type: "text/csv;charset=utf-8" }));
 }
 
 export async function downloadExcel(filename, sheets) {
+  trackEvent("download_excel", downloadEventParams(filename));
   const XLSX = await ensureXlsx();
   const workbook = XLSX.utils.book_new();
   sheets.forEach((sheet) => {
@@ -144,9 +153,50 @@ export function debounce(callback) {
   };
 }
 
+export function trackEvent(eventName, params = {}) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", eventName, {
+    page_path: window.location.pathname,
+    ...params,
+  });
+}
+
+function trackCalculatorUsed(root) {
+  const calculatorName = calculatorNameFromRoot(root);
+  if (usedCalculators.has(calculatorName)) return;
+  usedCalculators.add(calculatorName);
+  trackEvent("calculator_used", {
+    calculator_name: calculatorName,
+  });
+}
+
+function downloadEventParams(filename) {
+  return {
+    file_name: filename,
+    calculator_name: calculatorNameFromPath(window.location.pathname),
+  };
+}
+
 function ensureXlsx() {
   if (!xlsxPromise) xlsxPromise = import(XLSX_SRC);
   return xlsxPromise;
+}
+
+function calculatorNameFromRoot(root) {
+  const id = root?.id || "";
+  if (id.includes("hypotheek")) return "hypotheekcalculator";
+  if (id.includes("woonlasten")) return "woonlastencalculator";
+  if (id.includes("verkoopopbrengst")) return "verkoopopbrengstcalculator";
+  if (id.includes("brandstof")) return "brandstofkostencalculator";
+  return calculatorNameFromPath(window.location.pathname);
+}
+
+function calculatorNameFromPath(pathname) {
+  if (pathname.includes("hypotheek")) return "hypotheekcalculator";
+  if (pathname.includes("woonlasten")) return "woonlastencalculator";
+  if (pathname.includes("verkoopopbrengst")) return "verkoopopbrengstcalculator";
+  if (pathname.includes("brandstof")) return "brandstofkostencalculator";
+  return "website";
 }
 
 function toCsv(rows) {

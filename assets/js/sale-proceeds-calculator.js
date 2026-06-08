@@ -12,7 +12,7 @@ import {
   renderTable,
   syncRangeNumber,
   valueNumber,
-} from "./shared.js?v=native-20260608b";
+} from "./shared.js?v=native-20260608c";
 import {
   calculateSale,
   makeScenarios,

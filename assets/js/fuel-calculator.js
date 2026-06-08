@@ -11,7 +11,7 @@ import {
   destroyChart,
   bindCalculator,
   debounce,
-} from "./shared.js";
+} from "./shared.js?v=native-20260608c";
 import {
   FUEL_TYPES,
   FuelType,
