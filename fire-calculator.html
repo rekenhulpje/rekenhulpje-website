@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wat houd ik over na verkoop van mijn huis?</title>
-  <meta name="description" content="Bereken wat je indicatief overhoudt na verkoop van je huis. Inclusief hypotheek, verkoopkosten, overwaarde, restschuld en scenario's.">
+  <title>FIRE calculator - wanneer ben ik financieel onafhankelijk?</title>
+  <meta name="description" content="Bereken wanneer je financieel onafhankelijk bent met de FIRE calculator van Rekenhulpje. Gratis, zonder account en met Excel- en CSV-export.">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XSE89ZZVS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,31 +12,31 @@
     gtag('js', new Date());
     gtag('config', 'G-1XSE89ZZVS');
   </script>
-  <link rel="canonical" href="https://rekenhulpje.nl/verkoopopbrengst-calculator.html">
+  <link rel="canonical" href="https://rekenhulpje.nl/fire-calculator.html">
   <link rel="stylesheet" href="/assets/calculators.css?v=20260611c">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rekenhulpje">
-  <meta property="og:title" content="Wat houd ik over na verkoop van mijn huis?">
-  <meta property="og:description" content="Bereken netto verkoopopbrengst, overwaarde, restschuld en scenario's voor de verkoop van je woning.">
-  <meta property="og:url" content="https://rekenhulpje.nl/verkoopopbrengst-calculator.html">
+  <meta property="og:title" content="FIRE calculator - Rekenhulpje">
+  <meta property="og:description" content="Bereken indicatief je FIRE leeftijd, benodigd vermogen en jaarprojectie naar financiële onafhankelijkheid.">
+  <meta property="og:url" content="https://rekenhulpje.nl/fire-calculator.html">
   <meta property="og:image" content="https://rekenhulpje.nl/assets/rekenhulpje-social.png">
-  <meta property="og:image:alt" content="Rekenhulpje verkoopopbrengstcalculator zonder account">
+  <meta property="og:image:alt" content="Rekenhulpje FIRE calculator zonder account">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Wat houd ik over na verkoop van mijn huis?">
-  <meta name="twitter:description" content="Bereken wat je indicatief overhoudt na verkoop van je huis.">
+  <meta name="twitter:title" content="FIRE calculator - Rekenhulpje">
+  <meta name="twitter:description" content="Bereken wanneer je financieel onafhankelijk bent en hoeveel vermogen je nodig hebt.">
   <meta name="twitter:image" content="https://rekenhulpje.nl/assets/rekenhulpje-social.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Verkoopopbrengstcalculator",
-    "url": "https://rekenhulpje.nl/verkoopopbrengst-calculator.html",
+    "name": "FIRE calculator",
+    "url": "https://rekenhulpje.nl/fire-calculator.html",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
     "inLanguage": "nl-NL",
-    "description": "Calculator voor netto verkoopopbrengst, fiscale overwaarde, eigenwoningreserve en restschuldscenario's bij verkoop van een huis.",
+    "description": "Calculator voor financiële onafhankelijkheid, FIRE leeftijd, benodigd vermogen en jaarprojectie.",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -70,11 +70,12 @@
     }
 
     nav {
-      height: 68px;
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -114,7 +115,7 @@
     }
 
     .page-intro h1 {
-      max-width: 780px;
+      max-width: 860px;
       margin: 12px 0 12px;
       font-size: 40px;
       line-height: 1.1;
@@ -122,7 +123,7 @@
     }
 
     .page-intro p {
-      max-width: 760px;
+      max-width: 820px;
       margin: 0;
       font-size: 18px;
       color: #4f5f6f;
@@ -151,10 +152,11 @@
       font-size: 15px;
     }
 
-    .support-actions {
+    .support-actions,
+    .footer-links {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -168,7 +170,9 @@
       text-decoration: none;
     }
 
-    .support-secondary {
+    .support-secondary,
+    .support-link,
+    .related-link {
       color: #1769aa;
       font-weight: 700;
       text-decoration: none;
@@ -183,7 +187,7 @@
     }
 
     .content-section p {
-      max-width: 760px;
+      max-width: 820px;
       color: #536273;
     }
 
@@ -210,21 +214,30 @@
       margin: 0;
     }
 
+    .advanced-settings {
+      border: 1px solid #e3e8ef;
+      border-radius: 8px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .advanced-settings summary {
+      color: #405364;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .advanced-settings[open] summary {
+      margin-bottom: 14px;
+    }
+
     .faq {
-      max-width: 820px;
+      max-width: 840px;
     }
 
     .faq h3 {
       margin: 24px 0 6px;
       font-size: 20px;
-    }
-
-    .related-link {
-      display: inline-block;
-      margin-top: 16px;
-      color: #1769aa;
-      font-weight: 700;
-      text-decoration: none;
     }
 
     footer {
@@ -243,23 +256,6 @@
       flex-wrap: wrap;
     }
 
-    .support-link {
-      color: #1769aa;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .support-link:hover {
-      text-decoration: underline;
-    }
-
-    .footer-links {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
     .footer-tools {
       margin-bottom: 18px;
       display: flex;
@@ -273,7 +269,9 @@
       text-decoration: none;
     }
 
-    .footer-tools a:hover {
+    .footer-tools a:hover,
+    .support-link:hover,
+    .related-link:hover {
       text-decoration: underline;
     }
 
@@ -285,7 +283,7 @@
       nav {
         height: auto;
         min-height: 62px;
-        flex-wrap: wrap;
+        justify-content: flex-start;
         padding: 10px 0;
       }
 
@@ -312,7 +310,6 @@
       .calculator-section {
         padding-top: 16px;
       }
-
     }
   </style>
 </head>
@@ -338,13 +335,13 @@
     <section class="page-intro">
       <div class="wrap">
         <a class="back-link" href="/">Terug naar overzicht</a>
-        <h1>Wat houd ik over na verkoop van mijn huis?</h1>
+        <h1>Wanneer ben ik financieel onafhankelijk?</h1>
         <p>
-          Bereken je netto verkoopopbrengst, verkoopkosten, fiscale overwaarde en mogelijke
-          restschuld. Handig als je wilt verkopen, verhuizen of een volgende woning wilt plannen.
+          Bereken met de FIRE calculator wanneer je vermogen groot genoeg kan zijn om je jaarlijkse uitgaven te dragen.
+          Je ziet je FIRE leeftijd, benodigd vermogen, jaarprojectie en het effect van rendement, inflatie en inleg.
         </p>
         <div class="support-card">
-          <p>Gratis te gebruiken, zonder account en zonder e-mailadres. Vind je deze calculator handig? Help Rekenhulpje groeien of volg de updates.</p>
+          <p>Gratis te gebruiken, zonder account en zonder e-mailadres. De uitkomst is indicatief en geen financieel advies.</p>
           <span class="support-actions">
             <a class="support-button" href="https://ko-fi.com/rekenhulpje" target="_blank" rel="noopener">Steun Rekenhulpje</a>
             <a class="support-secondary" href="https://www.instagram.com/rekenhulpje.nl/" target="_blank" rel="noopener">Instagram</a>
@@ -355,95 +352,93 @@
 
     <section class="calculator-section">
       <div class="wrap">
-        <div class="native-calculator" id="verkoopopbrengst-native-calculator">
+        <div class="native-calculator" id="fire-native-calculator">
           <section class="result-banner">
-            <span>Netto over na verkoop</span>
-            <strong id="sale-primary-result">€ 0</strong>
+            <span>FIRE leeftijd</span>
+            <strong id="fire-primary-result">0 jaar</strong>
           </section>
+
           <div class="calculator-grid">
             <div class="calculator-stack">
               <section class="calculator-card">
-                <h2>1. Woning verkopen</h2>
+                <h2>1. Jouw FIRE basis</h2>
                 <div class="field-grid">
                   <div class="field">
-                    <label for="sale-price">Verwachte verkoopprijs</label>
-                    <input id="sale-price" type="number" min="0" step="5000" value="450000">
+                    <label for="fire-current-age">Huidige leeftijd</label>
+                    <input id="fire-current-age" type="number" min="0" max="99" step="1" value="35">
                   </div>
                   <div class="field">
-                    <label for="sale-remaining-mortgage">Resterende hypotheek / eigenwoningschuld</label>
-                    <input id="sale-remaining-mortgage" type="number" min="0" step="5000" value="300000">
+                    <label for="fire-current-net-worth">Huidig vermogen</label>
+                    <input id="fire-current-net-worth" type="number" min="0" step="5000" value="50000">
                   </div>
                   <div class="field">
-                    <label for="sale-existing-home-reserve">Bestaande eigenwoningreserve</label>
-                    <input id="sale-existing-home-reserve" type="number" step="5000" value="0">
+                    <label for="fire-monthly-contribution">Maandelijkse inleg</label>
+                    <input id="fire-monthly-contribution" type="number" min="0" step="100" value="1000">
+                  </div>
+                  <div class="field">
+                    <label for="fire-annual-expenses">Jaarlijkse uitgaven na FIRE</label>
+                    <input id="fire-annual-expenses" type="number" min="0" step="1000" value="30000">
                   </div>
                 </div>
+                <p class="native-note" id="fire-status"></p>
               </section>
 
-              <section class="calculator-card">
-                <h2>2. Verkoopkosten</h2>
+              <details class="advanced-settings">
+                <summary>Geavanceerde aannames</summary>
                 <div class="field-grid">
                   <div class="field">
-                    <label for="sale-broker-percentage">Makelaarscourtage</label>
+                    <label for="fire-return-rate">Verwacht rendement na kosten en belasting</label>
                     <div class="range-row">
-                      <input id="sale-broker-range" type="range" min="0" max="5" step="0.1" value="1.5">
-                      <input id="sale-broker-percentage" type="number" min="0" max="5" step="0.1" value="1.5">
+                      <input id="fire-return-range" type="range" min="-5" max="12" step="0.1" value="5.0">
+                      <input id="fire-return-rate" type="number" min="-5" max="12" step="0.1" value="5.0">
                     </div>
                   </div>
-                  <div class="field"><label for="sale-broker-fixed-fee">Vaste makelaarskosten</label><input id="sale-broker-fixed-fee" type="number" min="0" step="100" value="0"></div>
-                  <div class="field"><label for="sale-energy-label-cost">Energielabel</label><input id="sale-energy-label-cost" type="number" min="0" step="50" value="300"></div>
-                  <div class="field"><label for="sale-styling-cost">Verkoopstyling / fotografie</label><input id="sale-styling-cost" type="number" min="0" step="50" value="750"></div>
-                  <div class="field"><label for="sale-valuation-cost">Taxatie / keuring</label><input id="sale-valuation-cost" type="number" min="0" step="50" value="0"></div>
-                  <div class="field"><label for="sale-advertising-cost">Advertentiekosten</label><input id="sale-advertising-cost" type="number" min="0" step="50" value="0"></div>
-                  <div class="field"><label for="sale-other-costs">Overige verkoopkosten</label><input id="sale-other-costs" type="number" min="0" step="50" value="0"></div>
+                  <div class="field">
+                    <label for="fire-withdrawal-rate">Opnamepercentage</label>
+                    <div class="range-row">
+                      <input id="fire-withdrawal-range" type="range" min="2" max="6" step="0.1" value="4.0">
+                      <input id="fire-withdrawal-rate" type="number" min="2" max="6" step="0.1" value="4.0">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="fire-inflation-rate">Inflatie uitgaven</label>
+                    <div class="range-row">
+                      <input id="fire-inflation-range" type="range" min="0" max="6" step="0.1" value="2.0">
+                      <input id="fire-inflation-rate" type="number" min="0" max="6" step="0.1" value="2.0">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="fire-contribution-growth">Jaarlijkse verhoging inleg</label>
+                    <input id="fire-contribution-growth" type="number" min="0" max="20" step="0.1" value="0">
+                  </div>
                 </div>
-              </section>
+                <p class="native-note">
+                  V1 rekent indicatief zonder aparte box 3-, AOW- of pensioenmodule. Vul rendement daarom in als verwacht rendement na kosten en belasting.
+                </p>
+              </details>
 
               <section class="calculator-card">
-                <h2>3. Extra afrekening</h2>
-                <div class="field-grid">
-                  <div class="field"><label for="sale-penalty-interest">Boeterente / afloskosten</label><input id="sale-penalty-interest" type="number" min="0" step="100" value="0"></div>
-                  <div class="field"><label for="sale-notary-cost">Notaris / royement</label><input id="sale-notary-cost" type="number" min="0" step="50" value="0"></div>
-                  <div class="field"><label for="sale-moving-buffer">Verhuisbuffer</label><input id="sale-moving-buffer" type="number" min="0" step="250" value="2500"></div>
-                </div>
-                <p class="native-note">Verhuisbuffer telt mee voor je cashplanning, maar niet voor fiscale overwaarde.</p>
-              </section>
-
-              <section class="calculator-card">
-                <h3>Volgende woning</h3>
-                <div class="field-grid">
-                  <div class="field"><label for="sale-next-home-price">Aankoopprijs volgende woning</label><input id="sale-next-home-price" type="number" min="0" step="5000" value="0"></div>
-                  <div class="field"><label for="sale-next-home-costs">Aankoopkosten volgende woning</label><input id="sale-next-home-costs" type="number" min="0" step="1000" value="0"></div>
-                  <div class="field"><label for="sale-desired-new-mortgage">Gewenste nieuwe hypotheek</label><input id="sale-desired-new-mortgage" type="number" min="0" step="5000" value="0"></div>
+                <h2>Download</h2>
+                <p class="native-note">Download de jaarprojectie naar Excel of CSV om scenario's verder te vergelijken.</p>
+                <div class="download-row">
+                  <button class="download-button" type="button" id="fire-excel-download">Download Excel</button>
+                  <button class="download-button secondary" type="button" id="fire-csv-download">Download CSV</button>
                 </div>
               </section>
             </div>
 
             <div class="calculator-stack">
-              <section class="metric-grid native" id="sale-metrics"></section>
-              <div class="alert good" id="sale-status"></div>
+              <section class="metric-grid native" id="fire-metrics"></section>
               <section class="calculator-card chart-box">
-                <h2>Van verkoopprijs naar netto over</h2>
-                <canvas id="sale-waterfall-chart" height="330"></canvas>
-              </section>
-              <section class="calculator-card">
-                <h2>Bijleenregeling indicatief</h2>
-                <div class="details-list" id="sale-tax-details"></div>
-                <p class="native-note">Indicatief, geen financieel of fiscaal advies.</p>
-              </section>
-              <section class="calculator-card">
-                <h2>Download</h2>
-                <div class="download-row">
-                  <button class="download-button" type="button" id="sale-excel-download">Download Excel</button>
-                  <button class="download-button secondary" type="button" id="sale-csv-download">Download CSV</button>
-                </div>
+                <h2>Vermogen over tijd</h2>
+                <canvas id="fire-chart" height="360"></canvas>
               </section>
             </div>
           </div>
 
           <section class="calculator-card" style="margin-top: 22px;">
-            <h2>Scenario's verkoopprijs</h2>
-            <div class="table-wrap" id="sale-scenarios-table"></div>
+            <h2>Jaarprojectie</h2>
+            <div class="table-wrap" id="fire-projection-table"></div>
           </section>
         </div>
       </div>
@@ -451,61 +446,78 @@
 
     <section class="content-section">
       <div class="wrap">
-        <h2>Netto opbrengst huis berekenen</h2>
+        <h2>FIRE calculator voor beginners</h2>
         <p>
-          Bij verkoop van een huis kijk je niet alleen naar de verkoopprijs. Je lost ook je resterende
-          hypotheek af en betaalt vaak verkoopkosten zoals makelaarskosten, energielabel, fotografie,
-          taxatie of advertentiekosten. Deze calculator helpt je inschatten wat je onderaan de streep
-          overhoudt.
+          FIRE staat voor Financial Independence, Retire Early. Het idee is dat je vermogen groot genoeg wordt
+          om je jaarlijkse uitgaven te betalen zonder volledig afhankelijk te zijn van werkinkomen. Deze FIRE calculator
+          gebruikt de bekende opnamepercentage-methode: bij 4% opname heb je ongeveer 25 keer je jaarlijkse uitgaven nodig.
         </p>
         <div class="info-grid">
           <article class="info-card">
-            <h3>Overwaarde en verkoopkosten</h3>
+            <h3>Benodigd vermogen berekenen</h3>
             <p>
-              De fiscale overwaarde is indicatief gebaseerd op verkoopprijs min eigenwoningschuld en
-              verkoopkosten. Dat sluit aan bij de uitleg van de Belastingdienst over overwaarde.
+              De calculator deelt je jaarlijkse uitgaven door je opnamepercentage. Bij 30.000 euro uitgaven en 4% opname
+              is je startdoel ongeveer 750.000 euro.
             </p>
           </article>
           <article class="info-card">
-            <h3>Scenario's bij lagere verkoopprijs</h3>
+            <h3>FIRE datum inschatten</h3>
             <p>
-              Bekijk wat er gebeurt als de verkoopprijs lager of hoger uitvalt. Zo zie je sneller of er
-              genoeg ruimte is voor verhuizing, dubbele lasten of een volgende woning.
+              Je huidige vermogen groeit met je verwachte rendement en maandelijkse inleg. Zodra je vermogen boven je
+              FIRE-doel komt, toont de calculator je indicatieve FIRE leeftijd en jaar.
             </p>
           </article>
           <article class="info-card">
-            <h3>Bijleenregeling indicatief</h3>
+            <h3>Gratis export naar Excel</h3>
             <p>
-              Als je met overwaarde verkoopt en een andere woning koopt, kan de bijleenregeling invloed
-              hebben op de renteaftrek van je nieuwe hypotheek.
+              Exporteer de jaarprojectie als Excel of CSV als je jouw scenario wilt bewaren, vergelijken of later verder
+              wilt uitwerken in een spreadsheet.
             </p>
           </article>
         </div>
+
+        <h2>Belangrijke aannames</h2>
+        <p>
+          Deze V1 rekent zonder aparte box 3-, AOW- of pensioenmodule. Dat maakt de tool laagdrempelig en snel, maar ook
+          indicatief. Gebruik het rendementveld daarom als verwacht rendement na kosten en belasting. In een latere versie
+          kunnen AOW, pensioen, box 3, coast FIRE en barista FIRE apart worden toegevoegd.
+        </p>
+        <p>
+          Je werkelijke FIRE-pad hangt af van rendementen, inflatie, belasting, uitgaven, leefstijl en persoonlijke keuzes.
+          Gebruik deze berekening daarom als startpunt voor inzicht, niet als financieel advies.
+        </p>
 
         <div class="faq">
           <h2>Veelgestelde vragen</h2>
-          <h3>Wat houd ik over na verkoop van mijn huis?</h3>
+          <h3>Wat betekent FIRE?</h3>
           <p>
-            Dat hangt af van je verkoopprijs, resterende hypotheek, verkoopkosten en extra afrekening
-            zoals boeterente of royementskosten. De calculator zet deze posten naast elkaar.
+            FIRE betekent Financial Independence, Retire Early. Je bouwt vermogen op zodat je minder of niet meer afhankelijk
+            bent van werkinkomen.
           </p>
-          <h3>Is overwaarde hetzelfde als netto opbrengst?</h3>
+          <h3>Hoeveel vermogen heb ik nodig voor FIRE?</h3>
           <p>
-            Niet altijd. Overwaarde is belangrijk voor fiscale regels zoals de bijleenregeling. Netto
-            opbrengst gaat over hoeveel geld je praktisch overhoudt na alle opgegeven kosten.
+            Dat hangt vooral af van je jaarlijkse uitgaven en opnamepercentage. Bij de 4%-regel deel je je jaarlijkse uitgaven
+            door 0,04.
           </p>
-          <h3>Is dit fiscaal advies?</h3>
+          <h3>Is de 4%-regel veilig?</h3>
           <p>
-            Nee. De berekening is indicatief. Controleer fiscale gevolgen altijd bij de Belastingdienst,
-            je adviseur of notaris.
+            De 4%-regel is een bekende vuistregel, maar geen garantie. Veel mensen testen daarom ook 3%, 3,5% of 4,5% om
+            conservatieve en optimistische scenario's te vergelijken.
+          </p>
+          <h3>Rekent deze calculator met belasting of pensioen?</h3>
+          <p>
+            Niet apart in V1. Het rendement is bedoeld als rendement na kosten en belasting. AOW, pensioen en box 3 kunnen later
+            als geavanceerde modules worden toegevoegd.
+          </p>
+          <h3>Wat gebeurt er als mijn rendement lager is?</h3>
+          <p>
+            Een lager rendement maakt de FIRE datum meestal later. Gebruik het rendementveld om een voorzichtig scenario te testen.
           </p>
         </div>
 
-        <a class="related-link" href="/hypotheekcalculator.html">Bereken hypotheeklasten voor je volgende woning</a>
+        <a class="related-link" href="/woonlastencalculator.html">Schat eerst je maandelijkse woonlasten beter in</a>
         <br>
-        <a class="related-link" href="/woonlastencalculator.html">Bereken je nieuwe woonlasten</a>
-        <br>
-        <a class="related-link" href="/brandstofkosten-calculator.html">Bereken ook je brandstofkosten per maand</a>
+        <a class="related-link" href="/extra-aflossen-hypotheek-berekenen.html">Bekijk of extra aflossen je vaste lasten verlaagt</a>
       </div>
     </section>
   </main>
@@ -530,6 +542,6 @@
   </footer>
   <script src="/assets/js/analytics-events.js?v=20260611"></script>
   <script src="/assets/vendor/chart.umd.min.js"></script>
-  <script type="module" src="/assets/js/sale-proceeds-calculator.js?v=native-20260611c"></script>
+  <script type="module" src="/assets/js/fire-calculator.js?v=native-20260611"></script>
 </body>
 </html>

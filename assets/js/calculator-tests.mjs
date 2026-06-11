@@ -24,6 +24,10 @@ import {
   calculateExtraPayoff,
   PayoffScenarioMode,
 } from "./extra-payoff-core.js";
+import {
+  calculateFirePlan,
+  fireTarget,
+} from "./fire-core.js";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -211,5 +215,78 @@ const oversizedPayoff = calculateExtraPayoff({
   mortgageType: MortgageType.ANNUITY,
 });
 assertEqual(oversizedPayoff.finalBalance, 0, "extra payoff cannot create negative balance");
+
+assertEqual(fireTarget(30_000, 4), 750_000, "fire target 4 percent rule");
+assertEqual(fireTarget(30_000, 3), 1_000_000, "lower withdrawal rate increases fire target");
+
+const noGrowthFire = calculateFirePlan({
+  currentAge: 35,
+  currentNetWorth: 50_000,
+  monthlyContribution: 0,
+  annualExpenses: 30_000,
+  annualReturnPercent: 0,
+  withdrawalRatePercent: 4,
+  inflationPercent: 0,
+  annualContributionIncreasePercent: 0,
+  maxAge: 40,
+  startYear: 2026,
+});
+assertEqual(noGrowthFire.finalNetWorth, 50_000, "fire no contribution and no return does not grow");
+assertEqual(noGrowthFire.reached, false, "fire not reached without enough assets");
+
+const lowContributionFire = calculateFirePlan({
+  currentAge: 35,
+  currentNetWorth: 50_000,
+  monthlyContribution: 500,
+  annualExpenses: 30_000,
+  annualReturnPercent: 5,
+  withdrawalRatePercent: 4,
+  inflationPercent: 0,
+  annualContributionIncreasePercent: 0,
+  maxAge: 100,
+  startYear: 2026,
+});
+const highContributionFire = calculateFirePlan({
+  currentAge: 35,
+  currentNetWorth: 50_000,
+  monthlyContribution: 1_500,
+  annualExpenses: 30_000,
+  annualReturnPercent: 5,
+  withdrawalRatePercent: 4,
+  inflationPercent: 0,
+  annualContributionIncreasePercent: 0,
+  maxAge: 100,
+  startYear: 2026,
+});
+assert(highContributionFire.yearsToFire < lowContributionFire.yearsToFire, "higher fire contribution lowers years to fire");
+
+const inflationFire = calculateFirePlan({
+  currentAge: 35,
+  currentNetWorth: 50_000,
+  monthlyContribution: 1_000,
+  annualExpenses: 30_000,
+  annualReturnPercent: 5,
+  withdrawalRatePercent: 4,
+  inflationPercent: 2,
+  annualContributionIncreasePercent: 0,
+  maxAge: 40,
+  startYear: 2026,
+});
+assert(inflationFire.projectionRows.at(-1)["FIRE doelvermogen"] > inflationFire.currentTarget, "inflation increases future fire target");
+
+const unreachableFire = calculateFirePlan({
+  currentAge: 99,
+  currentNetWorth: 10_000,
+  monthlyContribution: 0,
+  annualExpenses: 50_000,
+  annualReturnPercent: 0,
+  withdrawalRatePercent: 4,
+  inflationPercent: 0,
+  annualContributionIncreasePercent: 0,
+  maxAge: 100,
+  startYear: 2026,
+});
+assertEqual(unreachableFire.reached, false, "fire returns not reached status before age 100");
+assertEqual(unreachableFire.yearsToFire, null, "fire years to fire is null when not reached");
 
 export const passed = true;
