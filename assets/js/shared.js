@@ -61,6 +61,10 @@ export function bindCalculator(root, callback) {
       trackCalculatorUsed(root);
       callback();
     });
+    element.addEventListener("keyup", () => {
+      trackCalculatorUsed(root);
+      callback();
+    });
   });
 }
 

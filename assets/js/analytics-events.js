@@ -10,6 +10,7 @@
 
   function toolNameFromHref(href) {
     if (href.includes("hypotheekcalculator")) return "hypotheekcalculator";
+    if (href.includes("extra-aflossen")) return "extraaflossencalculator";
     if (href.includes("woonlastencalculator")) return "woonlastencalculator";
     if (href.includes("verkoopopbrengst")) return "verkoopopbrengstcalculator";
     if (href.includes("brandstofkosten")) return "brandstofkostencalculator";
@@ -38,7 +39,7 @@
       return;
     }
 
-    if (link.origin === window.location.origin && href.includes("calculator")) {
+    if (link.origin === window.location.origin && isToolHref(href)) {
       sendEvent("internal_tool_click", {
         link_url: href,
         link_text: link.textContent.trim(),
@@ -46,4 +47,8 @@
       });
     }
   });
+
+  function isToolHref(href) {
+    return href.includes("calculator") || href.includes("extra-aflossen");
+  }
 })();

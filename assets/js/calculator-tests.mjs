@@ -20,6 +20,9 @@ import {
   calculateTaxBreakdown,
   makePriceScenarios,
 } from "./fuel-core.js";
+import {
+  calculateExtraPayoff,
+} from "./extra-payoff-core.js";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -129,5 +132,49 @@ const fuelScenarios = makePriceScenarios({
 assertEqual(fuelScenarios.length, 5, "fuel scenario count");
 assertEqual(fuelScenarios.at(-1).Scenario, "+50 cent", "fuel last scenario");
 assert(fuelScenarios.at(-1).Maandkosten > fuelScenarios[0].Maandkosten, "fuel scenarios increase");
+
+const noExtraPayoff = calculateExtraPayoff({
+  principal: 300_000,
+  annualRatePercent: 4,
+  years: 25,
+  oneTimeExtra: 0,
+  monthlyExtra: 0,
+  mortgageType: MortgageType.ANNUITY,
+});
+assertClose(noExtraPayoff.baseFirstPayment, noExtraPayoff.extraFirstPayment, "no extra payoff same payment");
+assertClose(noExtraPayoff.interestSaved, 0, "no extra payoff saves no interest");
+
+const oneTimePayoff = calculateExtraPayoff({
+  principal: 300_000,
+  annualRatePercent: 4,
+  years: 25,
+  oneTimeExtra: 20_000,
+  monthlyExtra: 0,
+  mortgageType: MortgageType.ANNUITY,
+});
+assert(oneTimePayoff.extraFirstPayment < oneTimePayoff.baseFirstPayment, "one-time payoff lowers monthly payment");
+assert(oneTimePayoff.interestSaved > 0, "one-time payoff saves interest");
+assert(oneTimePayoff.comparisonRows[0]["Restschuld met extra"] < oneTimePayoff.comparisonRows[0]["Restschuld zonder extra"], "one-time payoff lowers balance");
+
+const monthlyPayoff = calculateExtraPayoff({
+  principal: 300_000,
+  annualRatePercent: 4,
+  years: 25,
+  oneTimeExtra: 0,
+  monthlyExtra: 200,
+  mortgageType: MortgageType.ANNUITY,
+});
+assert(monthlyPayoff.interestSaved > 0, "monthly payoff saves interest");
+assert(monthlyPayoff.monthsSaved > 0, "monthly payoff shortens payoff");
+
+const oversizedPayoff = calculateExtraPayoff({
+  principal: 50_000,
+  annualRatePercent: 4,
+  years: 10,
+  oneTimeExtra: 75_000,
+  monthlyExtra: 100,
+  mortgageType: MortgageType.ANNUITY,
+});
+assertEqual(oversizedPayoff.finalBalance, 0, "extra payoff cannot create negative balance");
 
 export const passed = true;
