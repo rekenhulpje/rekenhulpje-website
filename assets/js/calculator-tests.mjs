@@ -153,10 +153,15 @@ const oneTimePayoff = calculateExtraPayoff({
   monthlyExtra: 0,
   scenarioMode: PayoffScenarioMode.LOWER_PAYMENT,
   mortgageType: MortgageType.ANNUITY,
+  homeValue: 300_000,
+  deductionRate: 37.56,
 });
 assert(oneTimePayoff.extraFirstPayment < oneTimePayoff.baseFirstPayment, "one-time payoff lowers monthly payment");
 assert(oneTimePayoff.interestSaved > 0, "one-time payoff saves interest");
 assert(oneTimePayoff.comparisonRows[0]["Restschuld met extra"] < oneTimePayoff.comparisonRows[0]["Restschuld zonder extra"], "one-time payoff lowers balance");
+assert(oneTimePayoff.termCostRows.length > 0, "payoff term cost rows exist");
+assert(oneTimePayoff.termCostRows[0]["Netto maandlast met extra"] < oneTimePayoff.termCostRows[0]["Netto maandlast zonder extra"], "lower payment lowers net monthly cost");
+assert(oneTimePayoff.termCostRows[0]["Netto ruimte per maand"] > 0, "lower payment creates net monthly room");
 
 const shortenTermPayoff = calculateExtraPayoff({
   principal: 300_000,
@@ -170,6 +175,20 @@ const shortenTermPayoff = calculateExtraPayoff({
 assertClose(shortenTermPayoff.extraFirstPayment, shortenTermPayoff.baseFirstPayment, "shorten term keeps monthly payment");
 assert(shortenTermPayoff.monthsSaved > oneTimePayoff.monthsSaved, "shorten term saves more months");
 assert(shortenTermPayoff.interestSaved > oneTimePayoff.interestSaved, "shorten term saves more interest");
+
+const reinvestSavingsPayoff = calculateExtraPayoff({
+  principal: 300_000,
+  annualRatePercent: 4,
+  years: 25,
+  oneTimeExtra: 20_000,
+  monthlyExtra: 0,
+  scenarioMode: PayoffScenarioMode.REINVEST_SAVINGS,
+  mortgageType: MortgageType.ANNUITY,
+  homeValue: 300_000,
+  deductionRate: 37.56,
+});
+assertClose(reinvestSavingsPayoff.extraFirstPayment, reinvestSavingsPayoff.baseFirstPayment, "reinvest savings keeps gross monthly payment");
+assert(reinvestSavingsPayoff.monthsSaved > 0, "reinvest savings shortens payoff");
 
 const monthlyPayoff = calculateExtraPayoff({
   principal: 300_000,

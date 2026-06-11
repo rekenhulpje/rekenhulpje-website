@@ -352,7 +352,7 @@
       <div class="wrap">
         <div class="native-calculator" id="extra-aflossen-native-calculator">
           <section class="result-banner">
-            <span>Nieuwe maandlast indicatief</span>
+            <span>Netto maandlast indicatief</span>
             <strong id="payoff-primary-result">€ 0/mnd</strong>
           </section>
 
@@ -395,8 +395,8 @@
                   <div class="field">
                     <span class="radio-label">Doel extra aflossen</span>
                     <div class="radio-group">
-                      <label><input type="radio" name="payoff-scenario-mode" value="lower_payment" checked> Maandlast verlagen</label>
-                      <label><input type="radio" name="payoff-scenario-mode" value="shorten_term"> Looptijd verkorten</label>
+                      <label><input type="radio" name="payoff-scenario-mode" value="lower_payment" checked> Vrij overhouden</label>
+                      <label><input type="radio" name="payoff-scenario-mode" value="reinvest_savings"> Besparing opnieuw aflossen</label>
                     </div>
                   </div>
                   <div class="field">
@@ -418,7 +418,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="native-note">Kies maandlast verlagen als je lagere maandlasten wilt zien. Kies looptijd verkorten als je ongeveer hetzelfde maandbedrag blijft betalen en sneller klaar wilt zijn.</p>
+                <p class="native-note">Kies vrij overhouden als je lagere maandlasten wilt zien. Kies besparing opnieuw aflossen als je de lagere maandlast meteen gebruikt om sneller af te lossen; dat werkt indicatief zoals looptijd verkorten.</p>
               </details>
             </div>
 
@@ -427,6 +427,10 @@
               <section class="calculator-card chart-box">
                 <h2>Restschuld over tijd</h2>
                 <canvas id="payoff-balance-chart" height="330"></canvas>
+              </section>
+              <section class="calculator-card chart-box">
+                <h2>Netto maandlast tijdens de looptijd</h2>
+                <canvas id="payoff-cost-chart" height="330"></canvas>
               </section>
             </div>
           </div>
@@ -451,7 +455,16 @@
           </div>
 
           <section class="calculator-card" style="margin-top: 22px;">
-            <h2>Scenario's extra aflossen</h2>
+            <h2>Lasten tijdens de looptijd</h2>
+            <p class="native-note">
+              De netto maandlast is indicatief en gebruikt rente, WOZ/eigenwoningforfait en aftrekpercentage.
+              Zo zie je per jaar hoeveel je bruto en netto overhoudt door extra aflossen.
+            </p>
+            <div class="table-wrap" id="payoff-term-cost-table"></div>
+          </section>
+
+          <section class="calculator-card" style="margin-top: 22px;">
+            <h2>Restschuld en rente</h2>
             <div class="table-wrap" id="payoff-comparison-table"></div>
           </section>
         </div>
@@ -470,8 +483,8 @@
           <article class="info-card">
             <h3>Maandlast lager</h3>
             <p>
-              In deze V1 rekenen we standaard alsof je hypotheek opnieuw wordt berekend over dezelfde resterende looptijd.
-              Daardoor zie je vooral het effect op je maandlast.
+              Kies vrij overhouden als je wilt zien hoeveel bruto en netto maandruimte extra aflossen kan opleveren.
+              De tabel laat dit per jaar tijdens de looptijd zien.
             </p>
           </article>
           <article class="info-card">
@@ -497,7 +510,8 @@
           </p>
           <h3>Verlaagt extra aflossen mijn maandlast?</h3>
           <p>
-            Dat kan, vooral als je hypotheekverstrekker de maandlast opnieuw berekent over de lagere schuld. Deze calculator rekent V1 standaard op die manier.
+            Dat kan, vooral als je hypotheekverstrekker de maandlast opnieuw berekent over de lagere schuld.
+            Je kunt in deze calculator ook kiezen om de besparing opnieuw af te lossen, waardoor de looptijd indicatief korter wordt.
           </p>
           <h3>Is extra aflossen altijd verstandig?</h3>
           <p>
@@ -532,6 +546,6 @@
   </footer>
   <script src="/assets/js/analytics-events.js?v=20260611"></script>
   <script src="/assets/vendor/chart.umd.min.js"></script>
-  <script type="module" src="/assets/js/extra-payoff-calculator.js?v=native-20260611g"></script>
+  <script type="module" src="/assets/js/extra-payoff-calculator.js?v=native-20260611h"></script>
 </body>
 </html>

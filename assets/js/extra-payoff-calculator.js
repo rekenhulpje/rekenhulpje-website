@@ -20,10 +20,12 @@ import {
 import {
   calculateExtraPayoff,
   PayoffScenarioMode,
-} from "./extra-payoff-core.js?v=native-20260611c";
+} from "./extra-payoff-core.js?v=native-20260611d";
 
 let balanceChart = null;
+let costChart = null;
 let currentRows = [];
+let currentTermCostRows = [];
 let currentSummaryRows = [];
 let currentInputsRows = [];
 let lastScenarioMode = null;
@@ -35,6 +37,16 @@ const columns = [
   { key: "Verschil restschuld", label: "Verschil restschuld" },
   { key: "Rente zonder extra", label: "Rente zonder extra" },
   { key: "Rente met extra", label: "Rente met extra" },
+];
+
+const termCostColumns = [
+  { key: "Jaar", label: "Jaar" },
+  { key: "Bruto maandlast zonder extra", label: "Bruto zonder extra" },
+  { key: "Netto maandlast zonder extra", label: "Netto zonder extra" },
+  { key: "Bruto maandlast met extra", label: "Bruto met extra" },
+  { key: "Netto maandlast met extra", label: "Netto met extra" },
+  { key: "Netto ruimte per maand", label: "Netto ruimte per maand" },
+  { key: "Restschuld met extra", label: "Restschuld met extra" },
 ];
 
 function getInputs() {
@@ -58,27 +70,35 @@ function calculate() {
   const result = calculateExtraPayoff(inputs);
   const newPayment = result.extraFirstPayment;
   const monthlyDifference = result.monthlyDifference;
+  const firstTermRow = result.termCostRows[0] || {};
+  const firstNetPayment = firstTermRow["Netto maandlast met extra"] || 0;
+  const firstNetDifference = firstTermRow["Netto ruimte per maand"] || 0;
 
-  byId("payoff-primary-result").textContent = euroMonth(newPayment);
+  byId("payoff-primary-result").textContent = euroMonth(firstNetPayment);
   byId("payoff-home-value").placeholder = String(Math.round(inputs.principal));
   byId("payoff-status").textContent =
     "Indicatief. Controleer altijd je boetevrije ruimte, bankvoorwaarden en fiscale gevolgen voordat je extra aflost.";
 
-  const shortenTerm = inputs.scenarioMode === PayoffScenarioMode.SHORTEN_TERM;
+  const reinvestSavings = [
+    PayoffScenarioMode.SHORTEN_TERM,
+    PayoffScenarioMode.REINVEST_SAVINGS,
+  ].includes(inputs.scenarioMode);
   renderMetrics(
     byId("payoff-metrics"),
-    shortenTerm
+    reinvestSavings
       ? [
-          { label: "Maandlast met extra aflossen", value: euroMonth(newPayment) },
-          { label: "Extra per maand", value: signedEuroMonth(monthlyDifference) },
+          { label: "Bruto maandlast met extra", value: euroMonth(newPayment) },
+          { label: "Netto maandlast indicatief", value: euroMonth(firstNetPayment) },
+          { label: "Netto verschil per maand", value: signedEuroMonth(firstNetDifference) },
           { label: "Rente bespaard indicatief", value: euro(result.interestSaved) },
           { label: "Eerder afgelost", value: `${result.monthsSaved} mnd` },
         ]
       : [
-          { label: "Nieuwe maandlast indicatief", value: euroMonth(newPayment) },
-          { label: "Verschil per maand", value: signedEuroMonth(monthlyDifference) },
+          { label: "Bruto maandlast met extra", value: euroMonth(newPayment) },
+          { label: "Netto maandlast indicatief", value: euroMonth(firstNetPayment) },
+          { label: "Netto extra over per maand", value: signedEuroMonth(firstNetDifference) },
+          { label: "Bruto verschil per maand", value: signedEuroMonth(monthlyDifference * -1) },
           { label: "Rente bespaard indicatief", value: euro(result.interestSaved) },
-          { label: "Restschuld na looptijd", value: euro(result.finalBalance) },
         ]
   );
 
@@ -90,11 +110,25 @@ function calculate() {
     "Rente zonder extra": round2(row["Rente zonder extra"]),
     "Rente met extra": round2(row["Rente met extra"]),
   }));
+  currentTermCostRows = result.termCostRows.map((row) => ({
+    ...row,
+    "Bruto maandlast zonder extra": round2(row["Bruto maandlast zonder extra"]),
+    "Netto maandlast zonder extra": round2(row["Netto maandlast zonder extra"]),
+    "Bruto maandlast met extra": round2(row["Bruto maandlast met extra"]),
+    "Netto maandlast met extra": round2(row["Netto maandlast met extra"]),
+    "Netto ruimte per maand": round2(row["Netto ruimte per maand"]),
+    "Indicatieve renteaftrek zonder extra": round2(row["Indicatieve renteaftrek zonder extra"]),
+    "Indicatieve renteaftrek met extra": round2(row["Indicatieve renteaftrek met extra"]),
+    "Restschuld zonder extra": round2(row["Restschuld zonder extra"]),
+    "Restschuld met extra": round2(row["Restschuld met extra"]),
+  }));
 
   currentSummaryRows = [
-    { Onderdeel: "Nieuwe maandlast indicatief", Waarde: round2(newPayment) },
-    { Onderdeel: "Oude maandlast indicatief", Waarde: round2(result.baseFirstPayment) },
-    { Onderdeel: "Verschil per maand", Waarde: round2(monthlyDifference) },
+    { Onderdeel: "Nieuwe bruto maandlast indicatief", Waarde: round2(newPayment) },
+    { Onderdeel: "Nieuwe netto maandlast indicatief", Waarde: round2(firstNetPayment) },
+    { Onderdeel: "Oude bruto maandlast indicatief", Waarde: round2(result.baseFirstPayment) },
+    { Onderdeel: "Bruto verschil per maand", Waarde: round2(monthlyDifference) },
+    { Onderdeel: "Netto ruimte per maand", Waarde: round2(firstNetDifference) },
     { Onderdeel: "Rente bespaard indicatief", Waarde: round2(result.interestSaved) },
     { Onderdeel: "Maanden eerder afgelost", Waarde: result.monthsSaved },
     { Onderdeel: "Restschuld na looptijd", Waarde: round2(result.finalBalance) },
@@ -112,7 +146,9 @@ function calculate() {
   ];
 
   renderTable(byId("payoff-comparison-table"), columns, formatRows(currentRows));
+  renderTable(byId("payoff-term-cost-table"), termCostColumns, formatTermCostRows(currentTermCostRows));
   renderChart(result);
+  renderCostChart(result);
 }
 
 function watchScenarioModeChange() {
@@ -129,6 +165,21 @@ function formatRows(rows) {
     "Verschil restschuld": euro(row["Verschil restschuld"]),
     "Rente zonder extra": euro(row["Rente zonder extra"]),
     "Rente met extra": euro(row["Rente met extra"]),
+  }));
+}
+
+function formatTermCostRows(rows) {
+  return rows.map((row) => ({
+    ...row,
+    "Bruto maandlast zonder extra": euroMonth(row["Bruto maandlast zonder extra"]),
+    "Netto maandlast zonder extra": euroMonth(row["Netto maandlast zonder extra"]),
+    "Bruto maandlast met extra": euroMonth(row["Bruto maandlast met extra"]),
+    "Netto maandlast met extra": euroMonth(row["Netto maandlast met extra"]),
+    "Netto ruimte per maand": signedEuroMonth(row["Netto ruimte per maand"]),
+    "Indicatieve renteaftrek zonder extra": euroMonth(row["Indicatieve renteaftrek zonder extra"]),
+    "Indicatieve renteaftrek met extra": euroMonth(row["Indicatieve renteaftrek met extra"]),
+    "Restschuld zonder extra": euro(row["Restschuld zonder extra"]),
+    "Restschuld met extra": euro(row["Restschuld met extra"]),
   }));
 }
 
@@ -187,9 +238,59 @@ function renderChart(result) {
   });
 }
 
+function renderCostChart(result) {
+  const canvas = byId("payoff-cost-chart");
+  if (!canvas) return;
+  destroyChart(costChart);
+  const yearlyRows = result.termCostRows.filter((row) => row.Jaar === 1 || row.Jaar % 2 === 0);
+
+  costChart = new window.Chart(canvas, {
+    type: "line",
+    data: {
+      labels: yearlyRows.map((row) => `Jaar ${row.Jaar}`),
+      datasets: [
+        {
+          label: "Netto zonder extra",
+          data: yearlyRows.map((row) => round2(row["Netto maandlast zonder extra"])),
+          borderColor: "#d94c57",
+          backgroundColor: "rgba(217, 76, 87, 0.12)",
+          pointRadius: 0,
+          tension: 0.2,
+        },
+        {
+          label: "Netto met extra",
+          data: yearlyRows.map((row) => round2(row["Netto maandlast met extra"])),
+          borderColor: "#1769aa",
+          backgroundColor: "rgba(23, 105, 170, 0.12)",
+          pointRadius: 0,
+          tension: 0.2,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { intersect: false, mode: "index" },
+      plugins: {
+        legend: { position: "bottom" },
+        tooltip: {
+          callbacks: {
+            label: (item) => `${item.dataset.label}: ${euroMonth(item.raw)}`,
+          },
+        },
+      },
+      scales: {
+        y: { ticks: { callback: (value) => euroMonth(value) } },
+      },
+    },
+  });
+}
+
 function scenarioModeLabel(value) {
-  if (value === PayoffScenarioMode.SHORTEN_TERM) return "Looptijd verkorten";
-  return "Maandlast verlagen";
+  if (value === PayoffScenarioMode.SHORTEN_TERM || value === PayoffScenarioMode.REINVEST_SAVINGS) {
+    return "Besparing opnieuw aflossen";
+  }
+  return "Vrij overhouden";
 }
 
 function signedEuroMonth(value) {
@@ -211,12 +312,13 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   syncRangeNumber("payoff-deduction-range", "payoff-deduction-rate", recalculate);
 
   byId("payoff-csv-download").addEventListener("click", () => {
-    downloadCsv("extra-aflossen-hypotheek-scenarios.csv", currentRows);
+    downloadCsv("extra-aflossen-hypotheek-lasten-looptijd.csv", currentTermCostRows);
   });
   byId("payoff-excel-download").addEventListener("click", () => {
     downloadExcel("extra-aflossen-hypotheek.xlsx", [
       { name: "Samenvatting", rows: currentSummaryRows },
       { name: "Invoer", rows: currentInputsRows },
+      { name: "Lasten looptijd", rows: currentTermCostRows },
       { name: "Scenario's", rows: currentRows },
     ]);
   });

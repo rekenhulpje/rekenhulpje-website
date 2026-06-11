@@ -1,6 +1,7 @@
 import {
   MortgageType,
   annuityPayment,
+  estimateTaxBenefit,
   monthlyRate,
 } from "./mortgage-core.js";
 
@@ -9,6 +10,7 @@ const MONTHS_PER_YEAR = 12;
 export const PayoffScenarioMode = {
   LOWER_PAYMENT: "lower_payment",
   SHORTEN_TERM: "shorten_term",
+  REINVEST_SAVINGS: "reinvest_savings",
 };
 
 export function calculateExtraPayoff(input) {
@@ -19,6 +21,12 @@ export function calculateExtraPayoff(input) {
   const monthlyExtra = Math.max(0, input.monthlyExtra);
   const mortgageType = input.mortgageType || MortgageType.ANNUITY;
   const scenarioMode = input.scenarioMode || PayoffScenarioMode.LOWER_PAYMENT;
+  const homeValue = Math.max(0, input.homeValue || principal);
+  const deductionRate = Math.max(0, input.deductionRate || 0);
+  const usesPaymentTarget = [
+    PayoffScenarioMode.SHORTEN_TERM,
+    PayoffScenarioMode.REINVEST_SAVINGS,
+  ].includes(scenarioMode);
 
   const base = simulateSchedule({
     principal,
@@ -34,10 +42,7 @@ export function calculateExtraPayoff(input) {
     years,
     mortgageType,
     monthlyExtra,
-    paymentTarget:
-      scenarioMode === PayoffScenarioMode.SHORTEN_TERM
-        ? baseFirstPayment + monthlyExtra
-        : null,
+    paymentTarget: usesPaymentTarget ? baseFirstPayment + monthlyExtra : null,
   });
 
   const extraFirstPayment = extra.rows[0]?.payment || 0;
@@ -55,6 +60,12 @@ export function calculateExtraPayoff(input) {
     finalBalance: extra.rows.at(-1)?.remainingBalance || 0,
     monthsSaved: Math.max(0, base.monthsToPayoff - extra.monthsToPayoff),
     comparisonRows: makeComparisonRows(base, extra),
+    termCostRows: makeTermCostRows({
+      base,
+      extra,
+      homeValue,
+      deductionRate,
+    }),
   };
 }
 
@@ -166,4 +177,61 @@ function sumInterestToMonth(rows, month) {
   return rows
     .slice(0, month)
     .reduce((sum, row) => sum + row.interest, 0);
+}
+
+function makeTermCostRows({ base, extra, homeValue, deductionRate }) {
+  const years = Math.max(
+    ...base.rows.map((row) => row.year),
+    ...extra.rows.map((row) => row.year),
+    0
+  );
+  const rows = [];
+
+  for (let year = 1; year <= years; year += 1) {
+    const baseYear = summarizeYear(base.rows, year, homeValue, deductionRate);
+    const extraYear = summarizeYear(extra.rows, year, homeValue, deductionRate);
+    rows.push({
+      Jaar: year,
+      "Bruto maandlast zonder extra": baseYear.grossMonthly,
+      "Netto maandlast zonder extra": baseYear.netMonthly,
+      "Bruto maandlast met extra": extraYear.grossMonthly,
+      "Netto maandlast met extra": extraYear.netMonthly,
+      "Netto ruimte per maand": baseYear.netMonthly - extraYear.netMonthly,
+      "Indicatieve renteaftrek zonder extra": baseYear.monthlyTaxBenefit,
+      "Indicatieve renteaftrek met extra": extraYear.monthlyTaxBenefit,
+      "Restschuld zonder extra": baseYear.remainingBalance,
+      "Restschuld met extra": extraYear.remainingBalance,
+    });
+  }
+
+  return rows;
+}
+
+function summarizeYear(rows, year, homeValue, deductionRate) {
+  const yearRows = rows.filter((row) => row.year === year);
+  if (!yearRows.length) {
+    return {
+      grossMonthly: 0,
+      netMonthly: 0,
+      monthlyTaxBenefit: 0,
+      remainingBalance: 0,
+    };
+  }
+
+  const annualPayment = yearRows.reduce((sum, row) => sum + row.payment, 0);
+  const annualInterest = yearRows.reduce((sum, row) => sum + row.interest, 0);
+  const tax = estimateTaxBenefit({
+    annualInterest,
+    wozValue: homeValue,
+    deductionRatePercent: deductionRate,
+  });
+  const grossMonthly = annualPayment / MONTHS_PER_YEAR;
+  const monthlyTaxBenefit = tax.monthlyTaxBenefit;
+
+  return {
+    grossMonthly,
+    netMonthly: Math.max(0, grossMonthly - monthlyTaxBenefit),
+    monthlyTaxBenefit,
+    remainingBalance: yearRows.at(-1)?.remainingBalance || 0,
+  };
 }
