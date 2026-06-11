@@ -13,18 +13,20 @@ import {
   syncRangeNumber,
   valueNumber,
   valueString,
-} from "./shared.js?v=native-20260611";
+} from "./shared.js?v=native-20260611c";
 import {
   MortgageType,
 } from "./mortgage-core.js?v=native-20260608b";
 import {
   calculateExtraPayoff,
-} from "./extra-payoff-core.js";
+  PayoffScenarioMode,
+} from "./extra-payoff-core.js?v=native-20260611c";
 
 let balanceChart = null;
 let currentRows = [];
 let currentSummaryRows = [];
 let currentInputsRows = [];
+let lastScenarioMode = null;
 
 const columns = [
   { key: "Moment", label: "Moment" },
@@ -43,6 +45,7 @@ function getInputs() {
     years: valueNumber("payoff-term-years"),
     oneTimeExtra: valueNumber("payoff-one-time-extra"),
     monthlyExtra: valueNumber("payoff-monthly-extra"),
+    scenarioMode: valueString("payoff-scenario-mode") || PayoffScenarioMode.LOWER_PAYMENT,
     mortgageType: valueString("payoff-mortgage-type") || MortgageType.ANNUITY,
     homeValue: valueNumber("payoff-home-value") || principal,
     deductionRate: valueNumber("payoff-deduction-rate"),
@@ -51,6 +54,7 @@ function getInputs() {
 
 function calculate() {
   const inputs = getInputs();
+  lastScenarioMode = inputs.scenarioMode;
   const result = calculateExtraPayoff(inputs);
   const newPayment = result.extraFirstPayment;
   const monthlyDifference = result.monthlyDifference;
@@ -60,12 +64,23 @@ function calculate() {
   byId("payoff-status").textContent =
     "Indicatief. Controleer altijd je boetevrije ruimte, bankvoorwaarden en fiscale gevolgen voordat je extra aflost.";
 
-  renderMetrics(byId("payoff-metrics"), [
-    { label: "Nieuwe maandlast indicatief", value: euroMonth(newPayment) },
-    { label: "Verschil per maand", value: signedEuroMonth(monthlyDifference) },
-    { label: "Rente bespaard indicatief", value: euro(result.interestSaved) },
-    { label: "Restschuld na looptijd", value: euro(result.finalBalance) },
-  ]);
+  const shortenTerm = inputs.scenarioMode === PayoffScenarioMode.SHORTEN_TERM;
+  renderMetrics(
+    byId("payoff-metrics"),
+    shortenTerm
+      ? [
+          { label: "Maandlast met extra aflossen", value: euroMonth(newPayment) },
+          { label: "Extra per maand", value: signedEuroMonth(monthlyDifference) },
+          { label: "Rente bespaard indicatief", value: euro(result.interestSaved) },
+          { label: "Eerder afgelost", value: `${result.monthsSaved} mnd` },
+        ]
+      : [
+          { label: "Nieuwe maandlast indicatief", value: euroMonth(newPayment) },
+          { label: "Verschil per maand", value: signedEuroMonth(monthlyDifference) },
+          { label: "Rente bespaard indicatief", value: euro(result.interestSaved) },
+          { label: "Restschuld na looptijd", value: euro(result.finalBalance) },
+        ]
+  );
 
   currentRows = result.comparisonRows.map((row) => ({
     ...row,
@@ -89,7 +104,8 @@ function calculate() {
     { Veld: "Rentepercentage", Waarde: percent(inputs.annualRatePercent) },
     { Veld: "Resterende looptijd", Waarde: inputs.years },
     { Veld: "Eenmalige extra aflossing", Waarde: inputs.oneTimeExtra },
-    { Veld: "Maandelijkse extra aflossing", Waarde: inputs.monthlyExtra },
+    { Veld: "Extra over per maand", Waarde: inputs.monthlyExtra },
+    { Veld: "Scenario", Waarde: scenarioModeLabel(inputs.scenarioMode) },
     { Veld: "Hypotheekvorm", Waarde: inputs.mortgageType },
     { Veld: "Woningwaarde/WOZ", Waarde: inputs.homeValue },
     { Veld: "Aftrekpercentage", Waarde: percent(inputs.deductionRate) },
@@ -97,6 +113,12 @@ function calculate() {
 
   renderTable(byId("payoff-comparison-table"), columns, formatRows(currentRows));
   renderChart(result);
+}
+
+function watchScenarioModeChange() {
+  const scenarioMode = valueString("payoff-scenario-mode") || PayoffScenarioMode.LOWER_PAYMENT;
+  if (lastScenarioMode === null || scenarioMode === lastScenarioMode) return;
+  calculate();
 }
 
 function formatRows(rows) {
@@ -165,6 +187,11 @@ function renderChart(result) {
   });
 }
 
+function scenarioModeLabel(value) {
+  if (value === PayoffScenarioMode.SHORTEN_TERM) return "Looptijd verkorten";
+  return "Maandlast verlagen";
+}
+
 function signedEuroMonth(value) {
   if (value === 0) return euroMonth(0);
   return `${value > 0 ? "+" : "-"}${euro(Math.abs(value))}/mnd`;
@@ -195,4 +222,5 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   });
 
   calculate();
+  window.setInterval(watchScenarioModeChange, 300);
 });

@@ -22,6 +22,7 @@ import {
 } from "./fuel-core.js";
 import {
   calculateExtraPayoff,
+  PayoffScenarioMode,
 } from "./extra-payoff-core.js";
 
 function assert(condition, message) {
@@ -150,11 +151,25 @@ const oneTimePayoff = calculateExtraPayoff({
   years: 25,
   oneTimeExtra: 20_000,
   monthlyExtra: 0,
+  scenarioMode: PayoffScenarioMode.LOWER_PAYMENT,
   mortgageType: MortgageType.ANNUITY,
 });
 assert(oneTimePayoff.extraFirstPayment < oneTimePayoff.baseFirstPayment, "one-time payoff lowers monthly payment");
 assert(oneTimePayoff.interestSaved > 0, "one-time payoff saves interest");
 assert(oneTimePayoff.comparisonRows[0]["Restschuld met extra"] < oneTimePayoff.comparisonRows[0]["Restschuld zonder extra"], "one-time payoff lowers balance");
+
+const shortenTermPayoff = calculateExtraPayoff({
+  principal: 300_000,
+  annualRatePercent: 4,
+  years: 25,
+  oneTimeExtra: 20_000,
+  monthlyExtra: 0,
+  scenarioMode: PayoffScenarioMode.SHORTEN_TERM,
+  mortgageType: MortgageType.ANNUITY,
+});
+assertClose(shortenTermPayoff.extraFirstPayment, shortenTermPayoff.baseFirstPayment, "shorten term keeps monthly payment");
+assert(shortenTermPayoff.monthsSaved > oneTimePayoff.monthsSaved, "shorten term saves more months");
+assert(shortenTermPayoff.interestSaved > oneTimePayoff.interestSaved, "shorten term saves more interest");
 
 const monthlyPayoff = calculateExtraPayoff({
   principal: 300_000,
@@ -162,6 +177,7 @@ const monthlyPayoff = calculateExtraPayoff({
   years: 25,
   oneTimeExtra: 0,
   monthlyExtra: 200,
+  scenarioMode: PayoffScenarioMode.SHORTEN_TERM,
   mortgageType: MortgageType.ANNUITY,
 });
 assert(monthlyPayoff.interestSaved > 0, "monthly payoff saves interest");

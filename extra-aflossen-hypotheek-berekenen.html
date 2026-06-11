@@ -13,7 +13,7 @@
     gtag('config', 'G-1XSE89ZZVS');
   </script>
   <link rel="canonical" href="https://rekenhulpje.nl/extra-aflossen-hypotheek-berekenen.html">
-  <link rel="stylesheet" href="/assets/calculators.css">
+  <link rel="stylesheet" href="/assets/calculators.css?v=20260611b">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rekenhulpje">
   <meta property="og:title" content="Extra aflossen hypotheek berekenen - Rekenhulpje">
@@ -381,16 +381,24 @@
                     <input id="payoff-one-time-extra" type="number" min="0" step="1000" value="20000">
                   </div>
                   <div class="field">
-                    <label for="payoff-monthly-extra">Maandelijkse extra aflossing</label>
+                    <label for="payoff-monthly-extra">Extra over per maand</label>
                     <input id="payoff-monthly-extra" type="number" min="0" step="50" value="0">
                   </div>
                 </div>
+                <p class="native-note">Vul hier in wat je maandelijks extra overhoudt als je dat direct wilt gebruiken voor extra aflossen.</p>
                 <p class="native-note" id="payoff-status"></p>
               </section>
 
               <details class="advanced-settings">
                 <summary>Geavanceerde instellingen</summary>
                 <div class="field-grid">
+                  <div class="field">
+                    <span class="radio-label">Doel extra aflossen</span>
+                    <div class="radio-group">
+                      <label><input type="radio" name="payoff-scenario-mode" value="lower_payment" checked> Maandlast verlagen</label>
+                      <label><input type="radio" name="payoff-scenario-mode" value="shorten_term"> Looptijd verkorten</label>
+                    </div>
+                  </div>
                   <div class="field">
                     <span class="radio-label">Hypotheekvorm</span>
                     <div class="radio-group">
@@ -410,7 +418,7 @@
                     </div>
                   </div>
                 </div>
-                <p class="native-note">V1 rekent standaard met maandlast verlagen over dezelfde resterende looptijd.</p>
+                <p class="native-note">Kies maandlast verlagen als je lagere maandlasten wilt zien. Kies looptijd verkorten als je ongeveer hetzelfde maandbedrag blijft betalen en sneller klaar wilt zijn.</p>
               </details>
             </div>
 
@@ -524,6 +532,6 @@
   </footer>
   <script src="/assets/js/analytics-events.js?v=20260611"></script>
   <script src="/assets/vendor/chart.umd.min.js"></script>
-  <script type="module" src="/assets/js/extra-payoff-calculator.js?v=native-20260611b"></script>
+  <script type="module" src="/assets/js/extra-payoff-calculator.js?v=native-20260611g"></script>
 </body>
 </html>

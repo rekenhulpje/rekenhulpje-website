@@ -18,6 +18,8 @@ Rekenhulpje is een Nederlandstalige website met praktische rekentools voor wonen
 - Streamlit is alleen geschikt als prototype of interne testomgeving, tenzij expliciet anders gevraagd.
 - Vermijd oplossingen die slapen, traag starten of afhankelijk zijn van iframe-laadtijd.
 - Belangrijke content en primaire functionaliteit moeten direct bruikbaar zijn op mobiel.
+- Houd publieke calculators compact aan de bovenkant: basisinvoer eerst, verdiepende instellingen in een uitklapblok.
+- Metric cards moeten lange bedragen netjes kunnen tonen op desktop en mobiel. Test met grote eurobedragen, `/mnd`-waarden en waarden boven `€ 200.000`; verklein tekst of laat cards naar minder kolommen vallen als getallen krap worden.
 
 ## Website en SEO
 

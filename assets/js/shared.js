@@ -52,6 +52,15 @@ export function syncRangeNumber(rangeId, numberId, callback) {
 }
 
 export function bindCalculator(root, callback) {
+  root.addEventListener("click", (event) => {
+    const label = event.target.closest?.("label");
+    const input = label?.querySelector?.('input[type="radio"], input[type="checkbox"]');
+    if (!input) return;
+
+    trackCalculatorUsed(root);
+    requestAnimationFrame(callback);
+  });
+
   root.querySelectorAll("input, select").forEach((element) => {
     element.addEventListener("input", () => {
       trackCalculatorUsed(root);
@@ -65,6 +74,12 @@ export function bindCalculator(root, callback) {
       trackCalculatorUsed(root);
       callback();
     });
+    if (element.type === "radio" || element.type === "checkbox") {
+      element.addEventListener("click", () => {
+        trackCalculatorUsed(root);
+        callback();
+      });
+    }
   });
 }
 
