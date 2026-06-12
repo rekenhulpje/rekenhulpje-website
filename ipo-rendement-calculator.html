@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brandstofkosten berekenen - benzine, diesel en accijns</title>
-  <meta name="description" content="Bereken wat benzine of diesel per maand kost. Bekijk brandstofkosten, accijns, btw en wat-als scenario's bij 5, 10, 25 of 50 cent hogere literprijs.">
+  <title>IPO rendement calculator - wat als ik in een IPO had belegd?</title>
+  <meta name="description" content="Bereken wat een belegging in een IPO of hype-aandeel waard kan worden. Vergelijk positieve en negatieve scenario's, inclusief voorbeelden zoals Google, Meta, Uber, Coinbase en Rivian.">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XSE89ZZVS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,31 +12,31 @@
     gtag('js', new Date());
     gtag('config', 'G-1XSE89ZZVS');
   </script>
-  <link rel="canonical" href="https://rekenhulpje.nl/brandstofkosten-calculator.html">
-  <link rel="stylesheet" href="/assets/calculators.css?v=20260611c">
+  <link rel="canonical" href="https://rekenhulpje.nl/ipo-rendement-calculator.html">
+  <link rel="stylesheet" href="/assets/calculators.css?v=20260612">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rekenhulpje">
-  <meta property="og:title" content="Brandstofkosten berekenen - Rekenhulpje">
-  <meta property="og:description" content="Bereken je brandstofkosten per maand, inclusief scenario's voor hogere benzine- of dieselprijzen en belastingdeel.">
-  <meta property="og:url" content="https://rekenhulpje.nl/brandstofkosten-calculator.html">
+  <meta property="og:title" content="IPO rendement calculator - Rekenhulpje">
+  <meta property="og:description" content="Reken scenario's door voor IPO's en hype-aandelen. Zie winst, verlies, drawdown en herstelpercentage.">
+  <meta property="og:url" content="https://rekenhulpje.nl/ipo-rendement-calculator.html">
   <meta property="og:image" content="https://rekenhulpje.nl/assets/rekenhulpje-social.png">
-  <meta property="og:image:alt" content="Rekenhulpje brandstofkosten calculator zonder account">
+  <meta property="og:image:alt" content="Rekenhulpje IPO rendement calculator zonder account">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Brandstofkosten berekenen - Rekenhulpje">
-  <meta name="twitter:description" content="Bereken benzine-, diesel- of LPG-kosten per maand met accijns, btw en prijsstijgingsscenario's.">
+  <meta name="twitter:title" content="IPO rendement calculator - Rekenhulpje">
+  <meta name="twitter:description" content="Bereken wat een IPO-belegging waard kan worden bij winst, verlies en hype-scenario's.">
   <meta name="twitter:image" content="https://rekenhulpje.nl/assets/rekenhulpje-social.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Brandstofkosten Calculator",
-    "url": "https://rekenhulpje.nl/brandstofkosten-calculator.html",
+    "name": "IPO rendement calculator",
+    "url": "https://rekenhulpje.nl/ipo-rendement-calculator.html",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
     "inLanguage": "nl-NL",
-    "description": "Calculator voor brandstofkosten per maand, accijns, btw en wat-als scenario's bij hogere benzine-, diesel- of LPG-prijzen.",
+    "description": "Calculator voor IPO rendement, hype-aandeel scenario's, winst, verlies, drawdown en herstelpercentage.",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -70,11 +70,12 @@
     }
 
     nav {
-      height: 68px;
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -114,7 +115,7 @@
     }
 
     .page-intro h1 {
-      max-width: 820px;
+      max-width: 900px;
       margin: 12px 0 12px;
       font-size: 40px;
       line-height: 1.1;
@@ -122,7 +123,7 @@
     }
 
     .page-intro p {
-      max-width: 800px;
+      max-width: 840px;
       margin: 0;
       font-size: 18px;
       color: #4f5f6f;
@@ -151,10 +152,11 @@
       font-size: 15px;
     }
 
-    .support-actions {
+    .support-actions,
+    .footer-links {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -168,7 +170,9 @@
       text-decoration: none;
     }
 
-    .support-secondary {
+    .support-secondary,
+    .support-link,
+    .related-link {
       color: #1769aa;
       font-weight: 700;
       text-decoration: none;
@@ -183,7 +187,7 @@
     }
 
     .content-section p {
-      max-width: 800px;
+      max-width: 840px;
       color: #536273;
     }
 
@@ -211,20 +215,12 @@
     }
 
     .faq {
-      max-width: 820px;
+      max-width: 840px;
     }
 
     .faq h3 {
       margin: 24px 0 6px;
       font-size: 20px;
-    }
-
-    .related-link {
-      display: inline-block;
-      margin-top: 16px;
-      color: #1769aa;
-      font-weight: 700;
-      text-decoration: none;
     }
 
     footer {
@@ -243,23 +239,6 @@
       flex-wrap: wrap;
     }
 
-    .support-link {
-      color: #1769aa;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .support-link:hover {
-      text-decoration: underline;
-    }
-
-    .footer-links {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
     .footer-tools {
       margin-bottom: 18px;
       display: flex;
@@ -273,7 +252,9 @@
       text-decoration: none;
     }
 
-    .footer-tools a:hover {
+    .footer-tools a:hover,
+    .support-link:hover,
+    .related-link:hover {
       text-decoration: underline;
     }
 
@@ -285,7 +266,7 @@
       nav {
         height: auto;
         min-height: 62px;
-        flex-wrap: wrap;
+        justify-content: flex-start;
         padding: 10px 0;
       }
 
@@ -338,14 +319,13 @@
     <section class="page-intro">
       <div class="wrap">
         <a class="back-link" href="/">Terug naar overzicht</a>
-        <h1>Wat kost benzine of diesel mij per maand?</h1>
+        <h1>Wat als ik in een IPO had belegd?</h1>
         <p>
-          Vul je literprijs, kilometers en verbruik in en zie direct je brandstofkosten per maand,
-          per jaar en per kilometer. Je ziet ook hoeveel accijns en btw er indicatief in je brandstofkosten zit
-          en wat een prijsstijging van 5, 10, 25 of 50 cent betekent.
+          Bereken wat een belegging in een IPO, SpaceX-achtig beursverhaal of ander hype-aandeel waard kan worden.
+          Vergelijk winnaars, verliezers, diepe dalingen en het rendement dat nodig is om verlies goed te maken.
         </p>
         <div class="support-card">
-          <p>Gratis te gebruiken, zonder account en zonder e-mailadres. Vind je deze calculator handig? Help Rekenhulpje groeien of volg de updates.</p>
+          <p>Gratis te gebruiken, zonder account en zonder e-mailadres. Indicatief, geen beleggingsadvies.</p>
           <span class="support-actions">
             <a class="support-button" href="https://ko-fi.com/rekenhulpje" target="_blank" rel="noopener">Steun Rekenhulpje</a>
             <a class="support-secondary" href="https://www.instagram.com/rekenhulpje.nl/" target="_blank" rel="noopener">Instagram</a>
@@ -356,76 +336,91 @@
 
     <section class="calculator-section">
       <div class="wrap">
-        <div class="native-calculator" id="brandstof-native-calculator">
+        <div class="native-calculator" id="ipo-native-calculator">
           <section class="result-banner">
-            <span>Brandstofkosten per maand</span>
-            <strong id="fuel-primary-result">EUR 0/mnd</strong>
+            <span>Waarde later</span>
+            <strong id="ipo-primary-result">0 euro</strong>
           </section>
 
           <div class="calculator-grid">
             <div class="calculator-stack">
               <section class="calculator-card">
-                <h2>1. Brandstofkosten</h2>
+                <h2>1. Kies je IPO-scenario</h2>
                 <div class="field-grid">
                   <div class="field">
-                    <label for="fuel-type">Brandstofsoort</label>
-                    <select id="fuel-type">
-                      <option value="benzine" selected>Benzine</option>
-                      <option value="diesel">Diesel</option>
-                      <option value="lpg">LPG</option>
+                    <label for="ipo-preset">Historisch voorbeeld</label>
+                    <select id="ipo-preset">
+                      <option value="custom">Eigen scenario</option>
+                      <option value="alphabet">Google/Alphabet stijl</option>
+                      <option value="amazon">Amazon stijl</option>
+                      <option value="meta">Facebook/Meta stijl</option>
+                      <option value="uber">Uber stijl</option>
+                      <option value="coinbase">Coinbase stijl</option>
+                      <option value="rivian">Rivian stijl</option>
                     </select>
                   </div>
                   <div class="field">
-                    <label for="fuel-liter-price">Literprijs</label>
-                    <input id="fuel-liter-price" type="number" min="0" step="0.01" value="2.23">
-                  </div>
-                  <div class="field">
-                    <label for="fuel-km-month">Kilometers per maand</label>
-                    <input id="fuel-km-month" type="number" min="0" step="50" value="1200">
-                  </div>
-                  <div class="field">
-                    <label for="fuel-consumption">Verbruik per 100 km</label>
-                    <input id="fuel-consumption" type="number" min="0" step="0.1" value="6.8">
+                    <label for="ipo-investment">Beleggingsbedrag</label>
+                    <input id="ipo-investment" type="number" min="0" step="100" value="1000">
                   </div>
                 </div>
-                <p class="native-note">Berekend verbruik: <strong id="fuel-liters-label">0 liter per maand</strong>.</p>
+                <p class="native-note" id="ipo-preset-note"></p>
               </section>
 
               <section class="calculator-card">
-                <h2>2. Accijns en btw</h2>
-                <p class="native-note">
-                  De belastingberekening gebruikt je berekende liters per maand. <span id="fuel-assumption-label"></span>
-                </p>
-                <div class="details-list" id="fuel-tax-details"></div>
-                <p class="native-note">Indicatief. Werkelijke pompprijzen en tarieven kunnen wijzigen.</p>
+                <h2>2. Pas het scenario aan</h2>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="ipo-start-price">Startprijs bij IPO</label>
+                    <input id="ipo-start-price" type="number" min="0.01" step="0.01" value="100">
+                  </div>
+                  <div class="field">
+                    <label for="ipo-later-price">Latere prijs</label>
+                    <input id="ipo-later-price" type="number" min="0" step="0.01" value="200">
+                  </div>
+                  <div class="field">
+                    <label for="ipo-low-percent">Diepe daling tussendoor</label>
+                    <input id="ipo-low-percent" type="number" min="-99" max="1000" step="1" value="-50">
+                  </div>
+                  <div class="field">
+                    <label for="ipo-high-percent">Hoogtepunt tussendoor</label>
+                    <input id="ipo-high-percent" type="number" min="-99" max="200000" step="10" value="300">
+                  </div>
+                </div>
+                <p class="native-note" id="ipo-status"></p>
               </section>
 
               <section class="calculator-card">
                 <h2>Download</h2>
-                <p class="native-note">Download de scenario's naar Excel of CSV om prijsstijgingen te vergelijken.</p>
+                <p class="native-note">Download je scenario's naar Excel of CSV om ze te bewaren of verder te vergelijken.</p>
                 <div class="download-row">
-                  <button class="download-button" type="button" id="fuel-excel-download">Download Excel</button>
-                  <button class="download-button secondary" type="button" id="fuel-csv-download">Download CSV</button>
+                  <button class="download-button" type="button" id="ipo-excel-download">Download Excel</button>
+                  <button class="download-button secondary" type="button" id="ipo-csv-download">Download CSV</button>
                 </div>
               </section>
             </div>
 
             <div class="calculator-stack">
-              <section class="metric-grid native" id="fuel-metrics"></section>
+              <section class="metric-grid native" id="ipo-metrics"></section>
               <section class="calculator-card chart-box">
-                <h2>Wat-als scenario's</h2>
-                <canvas id="fuel-scenario-chart" height="330"></canvas>
-              </section>
-              <section class="calculator-card chart-box">
-                <h2>Belastingdeel van je maandkosten</h2>
-                <canvas id="fuel-tax-chart" height="330"></canvas>
+                <h2>Scenario's in beeld</h2>
+                <canvas id="ipo-chart" height="360"></canvas>
               </section>
             </div>
           </div>
 
           <section class="calculator-card" style="margin-top: 22px;">
-            <h2>Scenario-overzicht</h2>
-            <div class="table-wrap" id="fuel-scenarios-table"></div>
+            <h2>Scenario-tabel</h2>
+            <div class="table-wrap" id="ipo-scenario-table"></div>
+          </section>
+
+          <section class="calculator-card" style="margin-top: 22px;">
+            <h2>Afgeronde historische voorbeelden</h2>
+            <p class="native-note">
+              Deze voorbeelden zijn bedoeld om het type uitkomst te laten zien: grote winnaar, gemengd verloop of negatief hype-scenario.
+              Ze zijn afgerond en niet bedoeld als realtime koersdata.
+            </p>
+            <div class="table-wrap" id="ipo-example-table"></div>
           </section>
         </div>
       </div>
@@ -433,78 +428,78 @@
 
     <section class="content-section">
       <div class="wrap">
-        <h2>Brandstofkosten berekenen</h2>
+        <h2>IPO rendement berekenen zonder hype</h2>
         <p>
-          Met deze brandstofkosten calculator bereken je snel wat benzine, diesel of LPG je per maand kost.
-          Dat is handig als je wilt weten hoeveel woon-werkverkeer, gezinsritten of een hogere benzineprijs
-          betekenen voor je maandlasten.
+          Bij een populaire beursgang zoals een SpaceX IPO, AI-aandeel of ander hype-aandeel gaat de aandacht vaak naar het
+          droomscenario. Deze IPO rendement calculator laat juist meerdere kanten zien: wat gebeurt er bij sterke groei,
+          wat gebeurt er bij een forse daling en hoeveel herstel is nodig na verlies?
         </p>
         <div class="info-grid">
           <article class="info-card">
-            <h3>Wat als benzine duurder wordt?</h3>
+            <h3>Wat als ik had belegd?</h3>
             <p>
-              De scenario's tonen direct wat een stijging van 5, 10, 25 of 50 cent per liter doet met je
-              maand- en jaarkosten. Bij olie- of brandstofschokken zie je zo snel wat dit voor jouw huishouden betekent.
+              Vul een beleggingsbedrag, startprijs en latere prijs in. De calculator toont de waarde later, winst of verlies
+              en het totale rendement.
             </p>
           </article>
           <article class="info-card">
-            <h3>Accijns benzine of diesel berekenen</h3>
+            <h3>Winnaars en verliezers</h3>
             <p>
-              De calculator splitst je maandbedrag indicatief in accijns, btw en netto brandstofdeel.
-              Zo zie je hoeveel belasting je ongeveer betaalt op benzine, diesel of LPG.
+              Historische IPO's laten zien dat uitkomsten extreem kunnen verschillen. Sommige bedrijven werden enorme winnaars,
+              andere stonden jaren onder water of verloren het grootste deel van hun beurswaarde.
             </p>
           </article>
           <article class="info-card">
-            <h3>Export naar Excel of CSV</h3>
+            <h3>Drawdown zichtbaar maken</h3>
             <p>
-              Exporteer de scenario's als Excel- of CSV-bestand als je brandstofkosten wilt meenemen in je
-              huishoudbudget, autokostenoverzicht of maandlastenvergelijking.
+              Een aandeel dat 50% daalt, moet daarna 100% stijgen om terug op nul te komen. Dat herstelpercentage maakt risico
+              tastbaarder dan alleen een eindrendement.
             </p>
           </article>
         </div>
 
-        <h2>Bronnen en aannames</h2>
+        <h2>Waarom SpaceX IPO als zoekhaak?</h2>
         <p>
-          In deze V1 vul je de literprijs zelf in. De accijnsbedragen zijn gebaseerd op de ANWB-uitleg voor 2026:
-          84,47 cent per liter benzine, 55,23 cent per liter diesel en 19,93 cent per liter LPG. De btw wordt
-          berekend als 21% van de pompprijs inclusief accijns. De Rijksoverheid beschrijft dat de tijdelijke
-          lagere brandstofaccijns tot en met 31 december 2026 doorloopt.
+          Rond grote IPO's zoeken veel mensen naar termen als SpaceX IPO, aandeel kopen, IPO rendement berekenen en wat als ik
+          had belegd. Rekenhulpje gebruikt die belangstelling om scenario's door te rekenen, niet om een aandeel aan te raden.
+          Je kunt de tool ook gebruiken voor Nvidia, AI-aandelen, crypto-gerelateerde aandelen of je eigen beleggingsidee.
         </p>
         <p>
-          Bronnen:
-          <a href="https://www.anwb.nl/auto/brandstof/accijns-en-btw" target="_blank" rel="noopener">ANWB over accijns en btw op brandstof</a>,
-          <a href="https://www.rijksoverheid.nl/themas/economie/koopkracht/lagere-accijns-op-brandstof" target="_blank" rel="noopener">Rijksoverheid over lagere accijns op brandstof</a>,
-          <a href="https://support.google.com/trends/answer/4359550?hl=nl" target="_blank" rel="noopener">Google Trends uitleg</a> en
-          <a href="https://developers.google.com/search/docs/appearance/ai-overviews" target="_blank" rel="noopener">Google Search Central over AI features</a>.
+          De belangrijkste les is dat een groot verhaal niet automatisch een goede belegging is. Kijk niet alleen naar het
+          mogelijke rendement, maar ook naar waardering, risico, spreiding, tijdshorizon en hoeveel verlies je tussendoor kunt dragen.
         </p>
 
         <div class="faq">
           <h2>Veelgestelde vragen</h2>
-          <h3>Hoe bereken ik brandstofkosten per maand?</h3>
+          <h3>Is dit beleggingsadvies?</h3>
           <p>
-            Vermenigvuldig je kilometers per maand met je verbruik per 100 kilometer en deel door 100.
-            Dat geeft liters per maand. Vermenigvuldig die liters met je literprijs.
+            Nee. Deze calculator geeft alleen scenario's. Het is geen advies om een IPO, aandeel of ETF te kopen of verkopen.
           </p>
-          <h3>Hoeveel btw betaal ik op benzine?</h3>
+          <h3>Waarom zijn de historische voorbeelden afgerond?</h3>
           <p>
-            Btw op brandstof is 21% over de pompprijs inclusief accijns. Omdat de pompprijs inclusief btw is,
-            rekent deze calculator het btw-deel terug uit de totale literprijs.
+            Voor een snelle rekentool is het belangrijker om de orde van grootte te tonen dan om realtime koersdata te suggereren.
+            De voorbeelden zijn dus educatief en indicatief.
           </p>
-          <h3>Wat gebeurt er als benzine 25 cent duurder wordt?</h3>
+          <h3>Waarom is een daling van 50% zo belangrijk?</h3>
           <p>
-            De calculator toont dit als scenario. Bij 80 liter per maand is 25 cent extra per liter bijvoorbeeld
-            ongeveer 20 euro extra per maand en 240 euro extra per jaar.
+            Na een daling van 50% heb je 100% stijging nodig om terug te komen op je startwaarde. Bij hype-aandelen zijn zulke
+            dalingen niet uitzonderlijk.
           </p>
-          <h3>Is dit fiscaal of politiek advies?</h3>
+          <h3>Kan ik deze calculator gebruiken voor SpaceX?</h3>
           <p>
-            Nee. De tool is bedoeld als praktische maandlastberekening. Controleer actuele tarieven bij officiële
-            bronnen als je de bedragen zakelijk of fiscaal gebruikt.
+            Ja, als je zelf een startprijs en scenario invult. De calculator zegt niet of SpaceX goedkoop of duur is, maar laat
+            zien wat verschillende rendementen met je inleg doen.
+          </p>
+          <h3>Wat is het verschil met de FIRE calculator?</h3>
+          <p>
+            De FIRE calculator rekent met langjarige vermogensopbouw. Deze IPO calculator rekent losse beleggingsscenario's door
+            en laat risico en rendement van een individuele positie zien.
           </p>
         </div>
 
-        <a class="related-link" href="/woonlastencalculator.html">Neem brandstof mee naast je woonlasten</a>
+        <a class="related-link" href="/fire-calculator.html">Bereken ook wanneer je financieel onafhankelijk kunt zijn</a>
         <br>
-        <a class="related-link" href="/hypotheekcalculator.html">Bereken ook je hypotheeklasten</a>
+        <a class="related-link" href="/brandstofkosten-calculator.html">Bekijk ook je maandelijkse brandstofkosten</a>
       </div>
     </section>
   </main>
@@ -528,8 +523,8 @@
       </span>
     </div>
   </footer>
-  <script src="/assets/js/analytics-events.js?v=20260611"></script>
+  <script src="/assets/js/analytics-events.js?v=20260612"></script>
   <script src="/assets/vendor/chart.umd.min.js"></script>
-  <script type="module" src="/assets/js/fuel-calculator.js?v=native-20260611c"></script>
+  <script type="module" src="/assets/js/ipo-calculator.js?v=20260612"></script>
 </body>
 </html>

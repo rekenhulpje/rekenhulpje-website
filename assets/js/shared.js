@@ -207,6 +207,7 @@ function calculatorNameFromRoot(root) {
   if (id.includes("woonlasten")) return "woonlastencalculator";
   if (id.includes("verkoopopbrengst")) return "verkoopopbrengstcalculator";
   if (id.includes("brandstof")) return "brandstofkostencalculator";
+  if (id.includes("ipo")) return "iporendementcalculator";
   return calculatorNameFromPath(window.location.pathname);
 }
 
@@ -215,6 +216,7 @@ function calculatorNameFromPath(pathname) {
   if (pathname.includes("woonlasten")) return "woonlastencalculator";
   if (pathname.includes("verkoopopbrengst")) return "verkoopopbrengstcalculator";
   if (pathname.includes("brandstof")) return "brandstofkostencalculator";
+  if (pathname.includes("ipo")) return "iporendementcalculator";
   return "website";
 }
 

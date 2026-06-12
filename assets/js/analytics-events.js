@@ -14,6 +14,7 @@
     if (href.includes("woonlastencalculator")) return "woonlastencalculator";
     if (href.includes("verkoopopbrengst")) return "verkoopopbrengstcalculator";
     if (href.includes("brandstofkosten")) return "brandstofkostencalculator";
+    if (href.includes("ipo")) return "iporendementcalculator";
     return "website";
   }
 
@@ -49,6 +50,6 @@
   });
 
   function isToolHref(href) {
-    return href.includes("calculator") || href.includes("extra-aflossen");
+    return href.includes("calculator") || href.includes("extra-aflossen") || href.includes("ipo");
   }
 })();
